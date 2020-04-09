@@ -1,0 +1,86 @@
+@media print{
+    .screen-only {
+        display: none;
+    }
+}
+@media (min-width: 800px) {
+    body {
+        background-color: #004445;
+        background: linear-gradient(to right, #499496, #a7d6d2);
+    }
+}
+@media (max-width: 799px) {
+    body {
+        background-color: lightsalmon;
+    }
+    h1::before{
+        content: "!";
+    }
+}
+
+@keyframes flasheando {
+    0% {
+        opacity: 1;
+    }
+    5% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    90% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+input:invalid {
+    border-color: red;
+}
+
+.inputChat {
+    background-color: #8aa09e;
+    /*background: linear-gradient(to right, #2c7873, #004445);*/
+    /*color: whitesmoke;*/
+    color: #000000;
+}
+#chat-log {
+    background-color: #bad4ca;
+    border-radius: 30px 30px 14px 14px;
+    -moz-border-radius: 30px 30px 14px 14px;
+    -webkit-border-radius: 30px 30px 14px 14px;
+    border: 0px outset #000000;
+    color: black;
+    animation-name: flasheando;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+.grid {
+    background-color: green;
+    display: grid;
+    padding: 20px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 600px 600px;
+}
+.grid-item {
+    background-color: honeydew;
+    font-size: 20px;
+}
+#footer {
+    text-align: center;
+    font-size: 0.8em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FFFFFF;
+    border-top: thin solid #BBBBBB;
+    clear: both;
+    color: #969696;
+}
+h1, h3{
+    color: #6fb98f;
+    text-align: center;
+}

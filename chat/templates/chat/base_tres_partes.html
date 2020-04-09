@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="{% static 'chat/css/mystyle.css' %}" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="{% static 'chat/img/favicon.ico' %}">
+        <!-- BOOTSTRAP-->
+            {# Cargamos la librería #}
+            {% load bootstrap4 %}
+
+            {# CSS Bootstrap #}
+            {% bootstrap_css %}
+            {% bootstrap_javascript jquery='full' %}
+        <!-- /BOOTSTRAP-->
+        {% block head %}
+        {% endblock %}
+        <title>{%block title %}Hogar Quintillan{% endblock %}</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row justify-content-start">
+                <!--<aside class="col-sm-12 col-md-2 col-12">-->
+                <aside class="col-12 col-lg-2 my-4">
+                    <nav class="collapse d-lg-block">
+                        <header>
+                            <h3 class="badge badge-dark">{% block headingA %}{% endblock headingA %}</h3>
+                                {% if user.is_authenticated %}
+                                    <div class="dropdown">
+                                        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ user.get_username }}
+                                        </button>
+                                        <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{% url "logout" %}" title="Cerrar sesion">Logout</a>
+                                        </div>
+                                    </div>
+                                  
+                              {% else %}
+                                  <a href="{% url "login" %}">Inicia sesion</a>
+                              {% endif %}
+                        </header>
+        
+                        <hr class="my-4">
+                            {% block navegacion %}
+                            {% endblock navegacion %}
+                        <hr class="my-4"> 
+                            {% block creacion %}
+                            {% endblock creacion %}
+                        <hr class="my-4">
+                         
+                            {% block listado %}
+                            {% endblock listado %}
+                    </nav>
+                    
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-success collapsed d-lg-none" data-target="aside > nav" data-toggle="collapse">Menu</button>
+                    
+                   
+                </aside>
+
+                <!--<main class="col-sm-12 col-md-7 col-12">-->
+                <main class="col-12 col-lg-7 my-2">
+                    
+                    <h1 id='cabeceraCanal'>
+                        {% block headingM %}{% endblock headingM %}
+                    </h1>
+                       
+                    {% block bloqueCentral %}
+                    {% endblock %}
+                    
+                </main>
+                <!--<div class="col-sm-12 col-md-3 col-12 mx-auto">-->
+                <div class="col-12 col-lg-3 my-4">
+                    {% block leftContent %}
+                    {% endblock leftContent %}
+                    <div class="fixed-bottom right"><span class="badge badge-dark">Hecho por Alberto @2020</span></div>
+                </div>       
+
+            </div>
+        </div>
+        <!--<h6 id="pieDerecho">Hecho por Alberto @2019</h6>-->
+        {% block alFondo %}
+        {% endblock alFondo %}
+    </body>
+</html>

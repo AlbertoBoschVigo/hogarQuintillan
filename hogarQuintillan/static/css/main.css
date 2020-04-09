@@ -1,0 +1,155 @@
+@charset "utf-8";
+#header {
+    border-style: none;
+    /*width: 800px;*/
+    height: auto;
+}
+#wrapper {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+    /*width: 800px;	*/
+}
+body {
+    /*background-color: lightgray;*/
+    background: linear-gradient(to right, rgb(153, 209, 241), rgb(127, 133, 145));
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 0.9em;
+    text-align: justify;
+    color: #474747;
+}
+h1 {
+    color: #270c39;
+}
+#footer {
+    text-align: center;
+    font-size: 0.8em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #FFFFFF;
+    border-top: thin solid #BBBBBB;
+    clear: both;
+    color: #969696;
+}
+#nav li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1em;
+    list-style-type: none;
+    border-bottom: thin solid #e0e0e0;
+    color: #1e9d36;
+    left: 0px;
+    list-style-position: inside;
+}
+#nav li a {
+    text-decoration: none;
+}
+#rightsidebar {
+    width: 180px;
+    height: 350px;
+    float: right;
+    padding-right: 20px;
+}
+#main {
+    width: 560px;
+    float: left;
+    /*margin: 0 10px 50px 20px;	*/
+    padding-right: 10px;
+}
+#logo {
+    padding: 10px;
+    float: left;
+}
+#top_menu {
+    float: right;
+    padding: 50px 20px 0px 0px;
+    font-size: 1.2em;
+    color: #270c39;
+}
+#top_menu a {
+    color: green;
+}
+section.leftSide{
+    background-color: rgb(77, 136, 151);
+}
+section.rightSide, .leftSide{
+    background-color: rgb(72, 146, 128);
+}
+
+table.tablaCalendario1{
+    margin-left: 5em;
+    margin-right: 1em;
+}
+table.tablaCalendario a{
+    z-index: 99;
+}
+h1.cabecera{
+    color: red;
+}
+table.month td {
+    border: 1px solid rgb(221, 221, 221);
+    padding: 20px;
+    text-align: center;
+}
+table.month th {
+    padding: 2px 0px;
+    text-align: center;
+}
+th.month {
+     display: none;
+     }
+div a {
+    color: green;
+}
+.carousel-item1 {
+    padding: 1.5em;
+}
+.calendarioMes1 {
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+.carousel-control-prev {
+    position: relative;
+    margin-left: -100px;
+    color: black;
+}
+
+.carousel-control-next {
+    position: relative;
+    margin-right: -100px;
+    color: black;
+}
+
+.myBtnTop{
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+
+.myBtnTop:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+  }
+
+#myBtnTopR{
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 60px; /* Place the button 60px from the right */
+    background-color: rgb(107, 172, 161); /* Set a background color */
+}
+
+#myBtnTopL{
+    bottom: 20px; /* Place the button at the bottom of the page */
+    left: 60px; /* Place the button 60px from the right */
+    background-color: rgb(219, 154, 154); /* Set a background color */
+}

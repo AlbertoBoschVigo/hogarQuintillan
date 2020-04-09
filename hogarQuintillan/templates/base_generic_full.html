@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{%block title %}Hogar Quintillan{% endblock %}</title>
+        <link href="{% static 'css/login_style.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+        <script type=text/javascript src="{% static 'js/basic.js' %}"></script>
+
+        <!-- BOOTSTRAP-->
+        {# Cargamos la librería #}
+	    {% load bootstrap4 %}
+ 
+	    {# CSS Bootstrap #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+    <!-- /BOOTSTRAP-->
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
+        <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
+        <div id="wrapper" class="container-fluid">
+            <header id="header" class="row">
+                <div id="topbanner" class="col"><img src="{% static 'img/top_banner_vera.jpg' %}" alt="" width= "200"/></div>
+                <div id="top_menu" class="col-6">
+
+                </div>
+                <div id="logo" class="col text-right">
+                    {%block cabeceraDerecha %}
+                    {% endblock %}
+                </div>
+                    
+            </header>
+            
+
+                
+
+                    {% block bloqueCentral %}
+                    {% endblock %}
+
+            <footer id="footer">
+                Copyright &copy;
+                
+                <script type="text/JavaScript">
+                    document.write(new Date().getFullYear());                    
+                </script> Quintillan's
+                <div><a href="{% url "calendarioGlobal" %}"><strong>{% now "d-m-y" %}</strong></a></div>
+                {% block footer%}
+                {% endblock %}
+            </footer>
+
+        </div>
+        
+    </body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "veraPage/base_toda_pagina.html" %}
+
+{% block title %}
+Tareas de Vera
+{% endblock %}
+
+{% block cabeceraDerecha %}
+<a href="https://www.edu.xunta.gal/centros/ceipxunqueira2/aulavirtual2/course/view.php?id=14" target="_blank">Curso de Vera</a>
+{% endblock %}
+
+{% block bloqueCentral %}
+{% for asignatura, items in asignaturas.items %}
+    {% if forloop.counter0|divisibleby:4%} 
+        <div class="row">
+    {% endif %}
+
+
+    <div class="col badge badge-{% cycle 'primary' 'secondary' %}">{{ asignatura }}
+
+    
+    <ul class="list-group">
+    {% for item, subs in items.items %}
+        <li class="list-group-item list-group-item-success">{{ item }}
+        {% for sub in subs %}
+            <br>
+            {% if sub.1 %}
+                <span class="badge badge-info">{{ sub.0 }} - {{ sub.1 }}</span>
+            {% else %}
+                <span class="badge badge-danger">{{ sub.0 }}</span>
+            {% endif %}
+        {% endfor %}
+        </li>
+    {% endfor %} 
+    </ul>
+
+    </div>
+
+    {% if forloop.counter|divisibleby:4 %} 
+        </div>
+        <br>
+    {% endif %}
+{% endfor %}
+{% if asignaturas|length < 4 or not asignaturas|length|divisibleby:4 %}
+</div>
+{% endif %}
+{% endblock %}
