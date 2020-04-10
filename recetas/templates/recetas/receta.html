@@ -12,9 +12,9 @@
 <div class="list-group mt-4 mr-1">
         {% for categoria in categorias %}
             {% if categoria == receta.categoria %}
-                <a href = "{% url 'recetas_categoria' categoria %}" class="list-group-item list-group-item-action list-group-item-primary">{{ categoria }}</a>
+                <a href = "{% url 'recetas_categoria' categoria %}" class="list-group-item list-group-item-action list-group-item-primary">{{ categoria|capfirst }}</a>
             {% else %}
-                <a href = "{% url 'recetas_categoria' categoria %}" class="list-group-item list-group-item-action list-group-item-secondary">{{ categoria }}</a>
+                <a href = "{% url 'recetas_categoria' categoria %}" class="list-group-item list-group-item-action list-group-item-secondary">{{ categoria|capfirst }}</a>
             {% endif %}    
         {% endfor %}
         <a href="{% url 'recetas_categoria' 'todas' %}" class="list-group-item list-group-item-action list-group-item-secondary">Todas</a></li>
@@ -39,7 +39,7 @@
         <div class="tab-pane fade show active" id="elaboracion" role="tabpanel" aria-labelledby="elaboracion-tab">
             <div class="card-body text-info" id="div-elaboracion">
                 <h5 class="card-title">{{ receta.nombre }}</h5>
-                <p class="card-text">{% autoescape off %} {{ receta.elaboracion }} {% endautoescape %}</p>
+                <p class="card-text">{{ receta.elaboracion|linebreaks }}</p>
             </div>
         </div>
         <div class="tab-pane fade" id="ingredientes" role="tabpanel" aria-labelledby="ingredientes-tab">

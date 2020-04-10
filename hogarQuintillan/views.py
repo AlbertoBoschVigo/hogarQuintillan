@@ -9,7 +9,7 @@ import locale, re, time
 
 
 def index(request):
-    return HttpResponse('Activo')
+    return render(request, "index.html")
 
 def calendario(request, year=date.today().year, month=date.today().month):
     year = int(year)

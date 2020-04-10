@@ -19,6 +19,12 @@ class Ingrediente(models.Model):
         ('li', 'litros'),
         ('cu', 'cucharada'),
         ('ci', 'cucharadita'),
+        ('ud', 'unidades'),
+        ('pl', 'pellizco'),
+        ('pu', 'puñado'),
+        ('ma', 'manojo'),
+        ('di', 'dientes'),
+        ('ca', 'cabeza')
     ]
     nombre = models.CharField(max_length=64)
     tipoMedida = models.CharField(max_length=64, choices=MEDIDA)

@@ -21,12 +21,18 @@
         {% block head %}
         {% endblock %}
     </head>
-    <body>
+    <body class="px-2 pt-1">
         <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
         <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
-        <div id="wrapper" class="container">
+        <div id="wrapper" class="container mx-auto">
             <header id="header" class="row">
-                <div id="topbanner" class="col"><img src="{% static 'img/top_banner.gif' %}" alt="" /></div>
+                <div id="topbanner" class="col py-1 pr-2">
+                    {% if categoria %}
+                        <img src="{% static 'recetas/img/categoria_'|add:categoria|add:'_top.jpg' %}" alt="" width="220"/>
+                    {% else %}
+                        <img src="{% static 'recetas/img/categoria_todas_top.jpg' %}" alt="" width="220"/>
+                    {% endif %}
+                </div>
                 <div id="top_menu" class="col-6">
                     {% if topEnlaces %}
                         {% for enlace in topEnlaces %}
@@ -44,7 +50,7 @@
                     Aplicacion Personal<br>
                     Familia Quintillan<br>
                     {% if user.is_authenticated %}
-                        <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username }}</a>
+                        <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username|capfirst }}</a>
                         <br>
                         <br>
                     {% else %}
@@ -68,7 +74,7 @@
                     {% endblock %}
 
                 </section>
-                <section id="main" class="col-sm-9 col-md-7 col-lg-5 mx-auto text-center">
+                <section id="main" class="col-sm-9 col-md-7 col-lg-6 mx-auto text-center">
 
                     {% block bloqueCentral %}
                     {% endblock %}

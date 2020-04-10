@@ -1,3 +1,7 @@
 .nav-link {
     color: rgb(101, 131, 202);
 }
+
+#main {
+    min-height: 80%;
+}

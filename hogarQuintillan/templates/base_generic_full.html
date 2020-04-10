@@ -3,6 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{%block title %}Hogar Quintillan{% endblock %}</title>
         <link href="{% static 'css/login_style.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
@@ -24,14 +25,13 @@
     <body>
         <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
         <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
-        <div id="wrapper" class="container-fluid">
+        <div id="wrapper" class="container">
             <header id="header" class="row">
-                <div id="topbanner" class="col"><img src="{% static 'img/top_banner_vera.jpg' %}" alt="" width= "200"/></div>
                 <div id="top_menu" class="col-6">
 
                 </div>
                 <div id="logo" class="col text-right">
-                    {%block cabeceraDerecha %}
+                    {% block cabeceraDerecha %}
                     {% endblock %}
                 </div>
                     

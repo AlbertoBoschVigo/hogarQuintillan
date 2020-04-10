@@ -27,7 +27,7 @@ body {
 }
 
 .card-signin button{
-  background: linear-gradient(to right, rgb(153, 209, 241), rgb(127, 133, 145));
+  background: linear-gradient(to right, rgb(153, 209, 241), rgb(110, 150, 140));
   color: green;
 }
 

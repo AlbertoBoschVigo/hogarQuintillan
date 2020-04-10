@@ -9,17 +9,23 @@ from .models import Receta, IngredienteReceta, Categoria
 def index(request):
     return HttpResponse('Activo')
 
-def receta(request, idReceta):
+def receta(request, idReceta, categoria = ''):
     try:
         receta = Receta.objects.get(pk=idReceta)
         ingredientes = IngredienteReceta.objects.all().filter(receta_id=idReceta)
         categorias = Categoria.objects.all()
     except Receta.DoesNotExist:
         raise Http404("Esa receta no existe")
+    if categoria != '' and categoria != str(receta.categoria):
+        print(categoria)
+        print(receta.categoria)
+        raise Http404("Esa receta no cuadra en esta categoria")
+
     context = {
         "receta": receta,
         "ingredientes": ingredientes,
-        "categorias": categorias
+        "categorias": categorias,
+        "categoria":str(receta.categoria)
     }
     return render(request, "recetas/receta.html", context)
 
@@ -29,10 +35,10 @@ def categoria(request, categoria):
     else:
         try:
             cat = Categoria.objects.get(nombre= categoria)
-        except Receta.DoesNotExist:
+        except Categoria.DoesNotExist:
             raise Http404("Esa categoria no existe")
         context = {
-            "categoria": cat
+            "categoria": cat.nombre
         }
 
     return render(request, "recetas/recetas_categorias.html", context)
