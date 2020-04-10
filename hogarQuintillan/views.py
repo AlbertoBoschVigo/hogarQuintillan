@@ -21,7 +21,7 @@ def calendario(request, year=date.today().year, month=date.today().month):
         #month_name = calendar.month_name[month]
         #locale.setlocale(locale.LC_ALL, 'es_ES')
         #month_name = time.strftime('%B').capitalize()
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        #locale.setlocale(locale.LC_TIME, 'es_ES')
         month_name = datetime.strptime(str(month), "%m").strftime("%B").capitalize()
         title = "Nuestro Calendario - %s %s" % (month_name, year)
         calendarios = []
@@ -47,5 +47,4 @@ def calendario(request, year=date.today().year, month=date.today().month):
         }
         return render(request, "calendario.html", context)
     except Exception as e:
-        print(e)
         raise Http404(e)

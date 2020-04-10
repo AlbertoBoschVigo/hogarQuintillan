@@ -105,7 +105,7 @@ def calendario(request, year=date.today().year, month=date.today().month):
         #month_name = calendar.month_name[month]
         #locale.setlocale(locale.LC_ALL, 'es_ES')
         #month_name = time.strftime('%B').capitalize()
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        #locale.setlocale(locale.LC_TIME, 'es_ES')
         month_name = datetime.strptime(str(month), "%m").strftime("%B").capitalize()
         title = "Vera's Calendar - %s %s" % (month_name, year)
         calendarios = []
