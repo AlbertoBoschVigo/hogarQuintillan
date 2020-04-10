@@ -153,3 +153,6 @@ LOGIN_REDIRECT_URL = '/'
 
 #Registro en consola de envio de emails.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+import django_heroku
+django_heroku.settings(locals())

@@ -1,5 +1,7 @@
 Django>=3.0
+gunicorn
 django-bootstrap4
 psycopg2-binary
 channels
 channels_redis
+django_heroku
