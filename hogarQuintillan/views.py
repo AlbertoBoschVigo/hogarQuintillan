@@ -48,4 +48,4 @@ def calendario(request, year=date.today().year, month=date.today().month):
         return render(request, "calendario.html", context)
     except Exception as e:
         print(e)
-        raise Http404("Error inesperado en la pagina")
+        raise Http404(e)

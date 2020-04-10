@@ -4,4 +4,4 @@ django-bootstrap4
 psycopg2-binary
 channels
 channels_redis
-django_heroku
+django-heroku
