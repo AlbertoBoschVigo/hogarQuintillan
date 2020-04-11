@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link href="{% static 'chat/css/mystyle.css' %}" rel="stylesheet" type="text/css">
+        
         <link rel="shortcut icon" href="{% static 'chat/img/favicon.ico' %}">
         <!-- BOOTSTRAP-->
             {# Cargamos la librería #}
@@ -13,11 +13,12 @@
             {% bootstrap_css %}
             {% bootstrap_javascript jquery='full' %}
         <!-- /BOOTSTRAP-->
+        <link href="{% static 'chat/css/mystyle.css' %}" rel="stylesheet" type="text/css">
         {% block head %}
         {% endblock %}
         <title>{%block title %}Hogar Quintillan{% endblock %}</title>
     </head>
-    <body>
+    <body class="contenedor-total">
         <div class="container-fluid">
             <div class="row justify-content-start">
                 <!--<aside class="col-sm-12 col-md-2 col-12">-->
@@ -28,7 +29,7 @@
                                 {% if user.is_authenticated %}
                                     <div class="dropdown">
                                         <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{ user.get_username }}
+                                            {{ user.get_username|capfirst }}
                                         </button>
                                         <div class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="{% url "logout" %}" title="Cerrar sesion">Logout</a>

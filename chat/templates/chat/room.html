@@ -39,9 +39,12 @@
   </div>                       
 {% endblock creacion %}
 
+{% block listado %}
+<div class="p-6 mb-2 bg-secondary text-white">&nbsp;Listado Usuarios</div><ul id="listaUsuarios"></ul>
+{% endblock listado %}
 
 {% block bloqueCentral %}
-<h1><span class="badge badge-success">{{ room_name }}</span></h1>
+<h1><span class="badge badge-success">{{ room_name|capfirst }}</span></h1>
 <div id="container">
     <textarea id="chat-log" class="areaDeTexto form-control" rows="20" cols="100" readonly></textarea>
     <div id="usuario" data-user="{{ user.get_username }}" data-canal="Chat principal"></div>

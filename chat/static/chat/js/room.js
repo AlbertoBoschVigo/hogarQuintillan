@@ -11,8 +11,28 @@ document.addEventListener('DOMContentLoaded', function (){
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.hour + ' (' + data.user + '): ' + data.message + '\n');
-        document.querySelector('#chat-message-input').focus();
+        if(data.users){
+            document.getElementById("listaUsuarios").innerHTML = "";
+            data.users.forEach(elemento => {
+                var ul = document.getElementById("listaUsuarios");
+                var li = document.createElement("li");
+                const aTag = document.createElement('a');
+                //console.log(elemento);
+                aTag.appendChild(document.createTextNode(elemento));
+                aTag.setAttribute("id", elemento);
+                aTag.setAttribute("href","javascript:void(0)"); 
+                aTag.setAttribute("onclick", `privadoEnlace("${elemento}");`);
+                //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
+                aTag.className = "badge badge-light enlace-usuario";
+                li.appendChild(aTag);
+                ul.appendChild(li);
+            });
+        }
+        else{
+            document.querySelector('#chat-log').value += (data.hour + ' (' + data.user + '): ' + data.message + '\n');
+            document.querySelector('#chat-message-input').focus();
+        }
+        
     };
 
     chatSocket.onclose = function(e) {

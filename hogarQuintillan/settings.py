@@ -77,12 +77,18 @@ WSGI_APPLICATION = 'hogarQuintillan.wsgi.application'
 
 ASGI_APPLICATION = 'hogarQuintillan.routing.application'
 
-CHANNEL_LAYERS = {
+TEST_CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(os.getenv('REDIS_HOST', '127.0.0.1'), os.getenv('REDIS_PORT', 6379))]
         },
+    },
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
 
@@ -127,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us' # 'es' # 'en-us'por defecto
+LANGUAGE_CODE = 'es' # 'es' # 'en-us'por defecto
 
 TIME_ZONE = 'Europe/Madrid' # UCT por defecto
 
