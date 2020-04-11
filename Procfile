@@ -1,1 +1,1 @@
-web: daphne hogarQuintillan.routing:application -b 0.0.0.0 -p 8001
+web: daphne hogarQuintillan.asgi:application -b 0.0.0.0 -p 8001
