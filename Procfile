@@ -1,1 +1,1 @@
-web: daphne hogarQuintillan.asgi:application
+web: daphne hogarQuintillan.asgi:application --port $PORT --bind 0.0.0.0
