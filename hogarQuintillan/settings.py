@@ -52,7 +52,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -103,16 +103,16 @@ WSGI_APPLICATION = 'hogarQuintillan.wsgi.application'
 
 ASGI_APPLICATION = 'hogarQuintillan.routing.application'
 
-TEST_CHANNEL_LAYERS = {
+CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [(os.getenv('REDIS_HOST', '127.0.0.1'), os.getenv('REDIS_PORT', 6379))]
+            "hosts": [(os.getenv('REDIS_URL', '127.0.0.1'), os.getenv('REDIS_PORT', 6379))]
         },
     },
 }
 
-CHANNEL_LAYERS = {
+TEST_CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
