@@ -75,7 +75,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.roomUsers[self.room_group_name] = [user]
         else:
             self.roomUsers[self.room_group_name].append(user)
-        print(self.roomUsers)
    
     def quitarUsuario(self, user):
         self.roomUsers[self.room_group_name].remove(user)

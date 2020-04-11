@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'veraPage.apps.VerapageConfig',
     'chat.apps.ChatConfig',
     'recetas.apps.RecetasConfig',
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'channels'
 ]
 
 MIDDLEWARE = [
