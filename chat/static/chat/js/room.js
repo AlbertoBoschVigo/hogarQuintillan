@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function (){
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
-    var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+    var ws_scheme = window.location.protocol == "https:" ? "wss://" : "ws://";
+    //ReconnectingWebSocket()//
     const chatSocket = new WebSocket(
         ws_scheme
         + window.location.host
