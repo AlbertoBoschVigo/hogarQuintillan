@@ -9,29 +9,12 @@ https://docs.djangoproject.com/en/3.0/howto/deployment/asgi/
 
 import os
 import django
-
-#from hogarQuintillan.websocket import websocket_application
-#from django.core.asgi import get_asgi_application
 from channels.routing import get_default_application
-from .routing import application
 
+#from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hogarQuintillan.settings')
+#settings.configure()
 
-"""
-django_application = get_asgi_application()
-
-async def application(scope, receive, send):
-    if scope['type'] == 'http':
-        # Let Django handle HTTP requests
-        await django_application(scope, receive, send)
-    elif scope['type'] == 'websocket':
-        # We'll handle Websocket connections here
-        await websocket_application(scope, receive, send)
-    else:
-        raise NotImplementedError(f"Unknown scope type {scope['type']}")
-
-"""
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hogarQuintillan.settings")
 django.setup()
-
-application = application()
+application = get_default_application()
