@@ -43,8 +43,8 @@ def tareas(request):
                 "COMPRENSIÓN LECTORA" : [["comprendo_un_poema.pdf", cpt]],
                 "ACTIVIDADES DE REPASO" : [["Actividades de repaso_lg.pdf", cpt]],
                 "Repaso ortografía" : [["aprendo_mais.pdf", cpt], ["signos_interrogacion_admiracion.pdf", cpt]],
-                "Repaso de gramática e ortografía" : [["SILABAS_LG.pdf", cpt], ["SUBSTANTIVOS_LG.pdf", pdt], ["substantivos_interrogacion_admircion.pdf", pdt]],
-                "HAMBURGUESA, BOCADILLOS E ROSQUILLAS":[["HAMBURGUESA_BOCADILLOS_ROSQUILLAS.pdf", pdt]],
+                "Repaso de gramática e ortografía" : [["SILABAS_LG.pdf", cpt], ["SUBSTANTIVOS_LG.pdf", cpt], ["substantivos_interrogacion_admircion.pdf", cpt]],
+                "HAMBURGUESA, BOCADILLOS E ROSQUILLAS":[["HAMBURGUESA_BOCADILLOS_ROSQUILLAS.pdf", cpt]],
             },
             mt:{
                 "REPASO":[["mat_ep3_REPASO.pdf", cpt]],
