@@ -3,7 +3,9 @@
 import os
 import sys
 import re
+import logging
 
+logger = logging.getLogger(__name__)
 
 def read_env():
     """Pulled from Honcho code with minor updates, reads local default
@@ -15,6 +17,7 @@ def read_env():
             content = f.read()
     except IOError:
         content = ''
+        logger.info('Env file do not exist')
 
     for line in content.splitlines():
         m1 = re.match(r'\A([A-Za-z_0-9]+)=(.*)\Z', line)

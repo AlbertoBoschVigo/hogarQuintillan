@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 def read_env():
     """Pulled from Honcho code with minor updates, reads local default
@@ -23,6 +26,7 @@ def read_env():
             content = f.read()
     except IOError:
         content = ''
+        logger.info('Env file do not exist')
 
     for line in content.splitlines():
         m1 = re.match(r'\A([A-Za-z_0-9]+)=(.*)\Z', line)
@@ -36,6 +40,20 @@ def read_env():
                 val = re.sub(r'\\(.)', r'\1', m3.group(1))
             os.environ.setdefault(key, val)
 
+LOGGING = {
+    #Gestiona por consola todos los logging calls 'DEBUG' < 'INFO' < 'WARNING' < 'ERROR' < 'CRITICAL'
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -51,6 +69,8 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', False)
+
+logger.info(f'DEBUG establecido en {DEBUG}')
 
 ALLOWED_HOSTS = ['*']
 
@@ -103,35 +123,40 @@ WSGI_APPLICATION = 'hogarQuintillan.wsgi.application'
 
 ASGI_APPLICATION = 'hogarQuintillan.routing.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')]
-        },
-    },
-}
-
-TEST_CHANNEL_LAYERS = {
+if DEBUG:
+    CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
+else:
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                "hosts": [os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379')]
+            },
+        },
+    }
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ['DB_NAME'],
-        'USER': os.environ['DB_USER'],
-        'PASSWORD': os.environ['DB_PASS'],
-        'HOST': 'localhost',
-        'PORT': os.environ['DB_PORT'],
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['DB_NAME'],
+            'USER': os.environ['DB_USER'],
+            'PASSWORD': os.environ['DB_PASS'],
+            'HOST': 'localhost',
+            'PORT': os.environ['DB_PORT'],
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

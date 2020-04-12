@@ -5,6 +5,9 @@ from django.shortcuts import render
 from datetime import date, datetime
 from calendar import HTMLCalendar, LocaleHTMLCalendar
 import locale, re, time
+import logging
+
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 
@@ -47,4 +50,5 @@ def calendario(request, year=date.today().year, month=date.today().month):
         }
         return render(request, "calendario.html", context)
     except Exception as e:
-        raise Http404(e)
+        logging.error(f'Failed calendar: {e}')
+        raise Http404('Failed calendar')

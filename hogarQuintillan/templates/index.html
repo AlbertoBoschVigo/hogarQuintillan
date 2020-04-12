@@ -1,7 +1,26 @@
 {% extends 'base_generic_full.html' %}
 {% load static %}
 {% block bloqueCentral %}
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="{% static 'vid/video_papa.mp4' %}" allowfullscreen></iframe>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <h1 class="alert alert-primary text-center" role="alert">
+        Nothing to see 1
+      </h1>
+        
+    </div>
+    <div class="carousel-item">
+      <h1 class="alert alert-warning text-center" role="alert">
+        Nothing to see 2
+      </h1>
+
+    </div>
+    <div class="carousel-item">
+      <h1 class="alert alert-danger text-center" role="alert">
+        Nothing to see 3
+      </h1>
+
+    </div>
+  </div>
 </div>
 {% endblock %}
