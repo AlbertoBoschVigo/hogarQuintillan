@@ -6,8 +6,12 @@
 
 {% endblock %}
 
+{% block navegacion %}
+<div class="p-6 mb-2 bg-secondary text-white etiqueta-mini">&nbsp;Canales activos:</div><ul id="listaCanales"></ul>
+{% endblock %}
+
 {% block creacion %}
-<button type="button" class="btn btn-success float-none" data-toggle="modal" data-target="#exampleModal">Unete a un canal</button>
+<button type="button" class="btn btn-success float-none etiqueta-mini" data-toggle="modal" data-target="#exampleModal">Unete a un canal</button>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -40,20 +44,20 @@
 {% endblock creacion %}
 
 {% block listado %}
-<div class="p-6 mb-2 bg-secondary text-white">&nbsp;Listado Usuarios</div><ul id="listaUsuarios"></ul>
+<div class="p-6 mb-2 bg-secondary text-white etiqueta-mini">&nbsp;Usuarios en el canal:</div><ul id="listaUsuarios"></ul>
 {% endblock listado %}
 
 {% block bloqueCentral %}
-<h1><span class="badge badge-success">{{ room_name|capfirst }}</span></h1>
+<h1><span class="badge badge-success etiqueta-mini">{{ room_name|capfirst }}</span></h1>
 <div id="container">
-    <textarea id="chat-log" class="areaDeTexto form-control" rows="20" cols="100" readonly></textarea>
+    <textarea id="chat-log" class="form-control" readonly></textarea>
     <div id="usuario" data-user="{{ user.get_username }}" data-canal="Chat principal"></div>
     <br>
     <div>
         
         <input id="chat-message-input" name="inputMensaje" class="inputChat form-control text-black" placeholder="Enviar mensaje" size="100">
         <br>
-        <button type="submit" class="btn btn-success"  id="chat-message-submit">Enviar</button>
+        <button type="submit" class="btn btn-success etiqueta-mini"  id="chat-message-submit">Enviar</button>
         <!--<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send</button>-->
     </div>  
 </div> 

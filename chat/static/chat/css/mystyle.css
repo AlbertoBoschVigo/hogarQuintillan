@@ -5,13 +5,20 @@
 }
 @media (min-width: 800px) {
     body {
-        background-color: rgb(208, 245, 190);
+        background-color: rgb(237, 245, 233);
         /*background: linear-gradient(to right, #499496, #a7d6d2);*/
+    
+    }
+    #chat-log{
+        min-height: 60vh;
     }
 }
 @media (max-width: 799px) {
     body {
-        background-color: rgb(231, 250, 223);
+        background-color: rgb(239, 248, 236);
+    }
+    #chat-log{
+        min-height: 85vh;
     }
 }
 
@@ -33,7 +40,7 @@
 }
 
 .contenedor-total {
-    background-color: rgb(176, 211, 195);
+    background-color: rgb(202, 212, 208);
     /*background: linear-gradient(to right, #499496, #a7d6d2);*/
 }
 
@@ -46,27 +53,41 @@ input:invalid {
     /*background: linear-gradient(to right, #2c7873, #004445);*/
     /*color: whitesmoke;*/
     color: #000000;
-    border-color: #dce7e3;
-    
+    border-color: #dce7e3;    
 }
+
 #chat-message-input:focus {
     border-color: #c5f3e1;
     box-shadow: 0 0 0 0.2rem rgba(130, 182, 133, 0.25);
 }
 #chat-log {
     /*background-color: #bad4ca;*/
-    background-color: #dce7e3;
+    /*background-color: #dce7e3;*/
+    background-color: rgb(221, 224, 223);
     border-radius: 30px 30px 14px 14px;
     -moz-border-radius: 30px 30px 14px 14px;
     -webkit-border-radius: 30px 30px 14px 14px;
-    border: 0px outset #000000;
-    box-shadow: 0 0 0 0.2rem rgba(130, 182, 133, 0.25);
+    /*border: 0px outset #000000;*/
+    -webkit-box-shadow: 0px 3px 5px 5px rgba(130, 182, 133, 0.5);
+    -moz-box-shadow: 0px 3px 5px 5px rgba(130, 182, 133, 0.5);
+    box-shadow: 0px 3px 5px 5px rgba(130, 182, 133, 0.5);
     color: black;
     animation-name: flasheando;
     animation-duration: 2s;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
     animation-play-state: paused;
+}
+
+.etiqueta-mini {
+    margin-bottom: 8px;
+    margin-left: 3px;
+    margin-right: 3px;
+    -webkit-box-shadow: 0px 1px 2px 2px rgba(94,98,117,1);
+    -moz-box-shadow: 0px 1px 2px 2px rgba(94,98,117,1);
+    box-shadow: 0px 1px 2px 2px rgba(94,98,117,1);
+    /*-webkit-box-shadow: 0px 0px 12px 4px #000000; */
+    /*box-shadow: 0px 0px 12px 4px #000000;*/
 }
 
 #footer {

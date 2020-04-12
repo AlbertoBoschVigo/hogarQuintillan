@@ -28,6 +28,24 @@ document.addEventListener('DOMContentLoaded', function (){
                 li.appendChild(aTag);
                 ul.appendChild(li);
             });
+            if(data.chats){
+                document.getElementById("listaCanales").innerHTML = "";
+                data.chats.forEach(elemento => {
+                    var ul = document.getElementById("listaCanales");
+                    var li = document.createElement("li");
+                    const aTag = document.createElement('a');
+                    aTag.appendChild(document.createTextNode(elemento.replace("chat_", "")));
+                    aTag.setAttribute("id", elemento);
+                    aTag.setAttribute("href", window.location.protocol + "//" + window.location.host + "/chat/" + elemento.replace("chat_", ""));
+                    //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
+                    aTag.className = "badge badge-light enlace-chat";
+                    li.appendChild(aTag);
+                    ul.appendChild(li);
+                });
+            }
+            else{
+                console.log(data);
+            }
         }
         else{
             document.querySelector('#chat-log').value += (data.hour + ' (' + data.user + '): ' + data.message + '\n');

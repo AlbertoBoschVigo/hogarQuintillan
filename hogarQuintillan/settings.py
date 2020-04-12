@@ -73,8 +73,9 @@ DEBUG = os.environ.get('DEBUG', False) # Recuerda, no es bool, si existe la vari
 
 if DEBUG:
     logger.info(f'Modo DEBUG activado')
-
-ALLOWED_HOSTS = ['hogarquintillan.herokuapp.com','127.0.0.1', 'localhost']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+else:
+    ALLOWED_HOSTS = ['hogarquintillan.herokuapp.com']
 
 
 # Application definition
