@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import re
 import logging
+import dj_database_url
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +74,7 @@ DEBUG = os.environ.get('DEBUG', False) # Recuerda, no es bool, si existe la vari
 if DEBUG:
     logger.info(f'Modo DEBUG activado')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['hogarquintillan.herokuapp.com','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -94,6 +95,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,8 +130,8 @@ if DEBUG:
     CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    },
-}
+        },
+    }
 else:
     CHANNEL_LAYERS = {
         'default': {
@@ -155,8 +157,7 @@ if DEBUG:
     }
 else:
     DATABASES = {
-        'default': {
-        }
+        'default': os.environ['DATABASE_URL']
     }
 
 # Password validation
@@ -199,8 +200,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     "./hogarQuintillan/static/",
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'hogarQuintillan', 'static'),
 ]
+
+#python manage.py collectstatic --no-input
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Redireccion por defecto tras login.
 LOGIN_REDIRECT_URL = '/'
@@ -208,5 +212,6 @@ LOGIN_REDIRECT_URL = '/'
 #Registro en consola de envio de emails.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-import django_heroku
-django_heroku.settings(locals())
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
