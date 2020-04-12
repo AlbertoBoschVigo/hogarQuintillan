@@ -68,9 +68,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', False)
+DEBUG = os.environ.get('DEBUG', False) # Recuerda, no es bool, si existe la variable, siempre es True
 
-logger.info(f'DEBUG establecido en {DEBUG}')
+if DEBUG:
+    logger.info(f'Modo DEBUG activado')
 
 ALLOWED_HOSTS = ['*']
 
@@ -149,7 +150,7 @@ if DEBUG:
             'USER': os.environ['DB_USER'],
             'PASSWORD': os.environ['DB_PASS'],
             'HOST': 'localhost',
-            'PORT': os.environ['DB_PORT'],
+            'PORT': int(os.environ['DB_PORT']),
         }
     }
 else:
