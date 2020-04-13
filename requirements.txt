@@ -8,4 +8,4 @@ channels_redis
 django-heroku
 whitenoise
 dj-database-url
-pylibmc
+django-bmemcached
