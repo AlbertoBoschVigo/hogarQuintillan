@@ -27,7 +27,7 @@
                     <nav class="collapse d-lg-block">
                         <header>
                             <h3 class="badge badge-dark">{% block headingA %}{% endblock headingA %}</h3>
-                                {% if user.is_authenticated %}
+                                {% if user and user.is_authenticated %}
                                     <div class="dropdown">
                                         <button class="btn btn-success btn-sm dropdown-toggle etiqueta-mini" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{ user.get_username|capfirst }}

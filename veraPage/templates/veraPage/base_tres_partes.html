@@ -39,7 +39,7 @@
                 {% endfor %}
                 </div>
                 <div id="logo" class="col text-right">
-                    {% if user.is_authenticated %}
+                    {% if user and user.is_authenticated %}
                         <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username }}</a>
                         <br>
                         <br>

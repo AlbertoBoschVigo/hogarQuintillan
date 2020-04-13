@@ -34,6 +34,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
         if self.nuevaRoom:
             for _room in self.roomUsers.keys():
+                logger.debug(f'Notificando nueva room {_room}')
                 await self.channel_layer.group_send(
                     _room,
                     {
@@ -57,6 +58,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'users_notification',
                 'users': self.roomUsers.get(self.room_group_name),
+                'chats': list(self.roomUsers.keys()),
             }
         )
         if self.nuevaRoom:
@@ -110,7 +112,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.roomUsers[self.room_group_name] = [user]
             self.nuevaRoom = True
         else:
-            self.roomUsers[self.room_group_name].append(user)
+            if user not in self.roomUsers[self.room_group_name]:
+                self.roomUsers[self.room_group_name].append(user)
             self.nuevaRoom = False
 
         if self.roomLog.get(self.room_group_name) is None:

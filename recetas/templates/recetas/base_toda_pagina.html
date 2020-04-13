@@ -53,7 +53,7 @@
                     Bienvenido:<br>
                     Aplicacion Personal<br>
                     Familia Quintillan<br>
-                    {% if user.is_authenticated %}
+                    {% if user and user.is_authenticated %}
                         <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username|capfirst }}</a>
                         <br>
                         <br>
