@@ -215,7 +215,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
-    DATABASES['default']['OPTIONS']['sslmode']
+    del DATABASES['default']['OPTIONS']['sslmode']
 
 def get_cache():
     try:
