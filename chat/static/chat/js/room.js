@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function (){
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
     var ws_scheme = window.location.protocol == "https:" ? "wss://" : "ws://";
     //ReconnectingWebSocket()//
+    setTimeout(function() {
+        window.scrollTo(0, 1);
+    }, 2000);
     const chatSocket = new WebSocket(
         ws_scheme
         + window.location.host
@@ -12,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function (){
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
+        console.log(data);
         if(data.users){
             document.getElementById("listaUsuarios").innerHTML = "";
             data.users.forEach(elemento => {
@@ -43,9 +47,22 @@ document.addEventListener('DOMContentLoaded', function (){
                     ul.appendChild(li);
                 });
             }
-            else{
-                console.log(data);
-            }
+        }
+        else if(data.chats){
+            document.getElementById("listaCanales").innerHTML = "";
+            data.chats.forEach(elemento => {
+                var ul = document.getElementById("listaCanales");
+                var li = document.createElement("li");
+                const aTag = document.createElement('a');
+                aTag.appendChild(document.createTextNode(elemento.replace("chat_", "")));
+                aTag.setAttribute("id", elemento);
+                aTag.setAttribute("href", window.location.protocol + "//" + window.location.host + "/chat/" + elemento.replace("chat_", ""));
+                //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
+                aTag.className = "badge badge-light enlace-chat";
+                li.appendChild(aTag);
+                ul.appendChild(li);
+            });
+
         }
         else{
             document.querySelector('#chat-log').value += (data.hour + ' (' + data.user + '): ' + data.message + '\n');

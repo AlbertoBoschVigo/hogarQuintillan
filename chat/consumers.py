@@ -28,10 +28,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'users_notification',
                 'users': self.roomUsers.get(self.room_group_name),
-                'chats': list(self.roomUsers.keys())
+                'chats': list(self.roomUsers.keys()),
             }
             
         )
+        if self.nuevaRoom:
+            for _room in self.roomUsers.keys():
+                await self.channel_layer.group_send(
+                    _room,
+                    {
+                        'type': 'rooms_notification',
+                        'chats': list(self.roomUsers.keys()),
+                    }
+                )
 
     async def disconnect(self, close_code):
         # Leave room group
@@ -48,9 +57,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'users_notification',
                 'users': self.roomUsers.get(self.room_group_name),
-                'chats': list(self.roomUsers.keys())
             }
         )
+        if self.nuevaRoom:
+            for _room in self.roomUsers.keys():
+                await self.channel_layer.group_send(
+                    _room,
+                    {
+                        'type': 'rooms_notification',
+                        'chats': list(self.roomUsers.keys()),
+                    }
+                )
 
     # Receive message from WebSocket
     async def receive(self, text_data):
@@ -82,12 +99,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'chats':event['chats']
         }))
 
+    async def rooms_notification(self, event):
+        await self.send(text_data=json.dumps({
+            'chats':event['chats']
+        }))
+
     def incluirUsuario(self, user):
         _reg = (time.strftime("%H:%M:%S", time.localtime()),user, 'Se ha conectado')
         if self.roomUsers.get(self.room_group_name) is None:
             self.roomUsers[self.room_group_name] = [user]
+            self.nuevaRoom = True
         else:
             self.roomUsers[self.room_group_name].append(user)
+            self.nuevaRoom = False
 
         if self.roomLog.get(self.room_group_name) is None:
             self.roomLog[self.room_group_name] = [_reg]
@@ -100,4 +124,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.roomLog[self.room_group_name].append(_reg)
         if self.roomUsers[self.room_group_name] == []:
             self.roomUsers.pop(self.room_group_name, None)
+            self.nuevaRoom = True
+        else:
+            self.nuevaRoom = False
         
