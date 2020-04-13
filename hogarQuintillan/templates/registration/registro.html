@@ -1,0 +1,58 @@
+{% extends "base_generic.html" %}
+
+{% block head %}
+<script>
+  document.addEventListener('DOMContentLoaded', function (){
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+    document.querySelectorAll('.form-label-group').forEach(divs => {
+      var inp = divs.children[0];
+      var lab = divs.children[1];
+      var eti = divs.children[2];
+      inp.className = "form-control";
+      inp.value = "";
+      //inp.setAttribute('name', inp.id)
+      lab.setAttribute('for', inp.id);
+      if(eti){
+        console.log('entra');
+        inp.setAttribute('data-toggle', "tooltip");
+        inp.setAttribute('data-placement', "bottom");
+        inp.setAttribute('data-html', "true");
+        inp.setAttribute('title', eti.dataset.men);
+      }
+    });
+  });
+</script>
+{% endblock %}
+
+
+{% block bloqueCentral %}
+
+
+<div class="card card-signin my-5">
+  <div class="card-body etiqueta">
+      <h5 class="card-title text-center">Registrese</h5>
+      <form class="form-signin"method="post">
+          {% csrf_token %}
+      {% for field in form %}
+      <div class="form-label-group">
+        {{ field }}
+        {{ field.label_tag }}
+        
+        {% if field.help_text%}
+          <span data-men="{{ field.help_text }}" style="visibility: hidden"></span>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+          
+      </div>
+      {% endfor %}
+
+      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
+      </form>
+  </div>
+</div>
+
+{% endblock %}

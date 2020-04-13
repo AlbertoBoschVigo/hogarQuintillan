@@ -40,7 +40,7 @@
                 </div>
                 <div id="logo" class="col text-right">
                     {% if user and user.is_authenticated %}
-                        <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username }}</a>
+                        <a href="{% url "logout" %}" title="Cerrar sesion">Hola {{ user.get_username|capfirst }}</a>
                         <br>
                         <br>
                     {% else %}

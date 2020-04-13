@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 
+from django.views.decorators.cache import cache_page
+
 from .models import Receta, IngredienteReceta, Categoria
 
 import logging
@@ -10,6 +12,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+@cache_page(60 * 15)
 def index(request):
     listaCat = []
     try:
@@ -24,6 +27,7 @@ def index(request):
     except:
         return HttpResponse('Activo')
 
+@cache_page(60 * 15)
 def receta(request, idReceta, categoria = ''):
     try:
         receta = Receta.objects.get(pk=idReceta)
@@ -42,7 +46,8 @@ def receta(request, idReceta, categoria = ''):
         "categoria":str(receta.categoria)
     }
     return render(request, "recetas/receta.html", context)
-
+    
+@cache_page(60 * 15)
 def categoria(request, categoria):
     if categoria == 'todas':
         return HttpResponseRedirect(reverse("recetas_index", args =[]))

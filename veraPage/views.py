@@ -1,16 +1,23 @@
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
+from django.views.decorators.cache import cache_page
 
 from datetime import date, datetime
 from calendar import HTMLCalendar, LocaleHTMLCalendar
 import locale, re, time
+
+import logging
+
 # Create your views here.
 
+logger = logging.getLogger(__name__)
 
+@cache_page(60 * 15)
 def index(request):
     return HttpResponse('Activo')
-
+    
+@cache_page(60 * 15)
 def tareas(request):
     cpt= 'COMPLETADA'
     pdt = ""
@@ -95,17 +102,14 @@ def tareas(request):
     }
     return render(request, "veraPage/tareasVera.html", context)
 
+@cache_page(60 * 15)
 def calendario(request, year=date.today().year, month=date.today().month):
     year = int(year)
     month = int(month)
   
     if year < 1900 or year > 2099: year = date.today().year
     try:
-        #with TimeEncoding('es_ES.UTF-8'):
-        #month_name = calendar.month_name[month]
-        #locale.setlocale(locale.LC_ALL, 'es_ES')
-        #month_name = time.strftime('%B').capitalize()
-        #locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, 'es')
         month_name = datetime.strptime(str(month), "%m").strftime("%B").capitalize()
         title = "Vera's Calendar - %s %s" % (month_name, year)
         calendarios = []
@@ -121,7 +125,6 @@ def calendario(request, year=date.today().year, month=date.today().month):
 
             calendarios.append((datetime.strptime(str(i), "%m").strftime("%B").capitalize(), cal))
 
-
         context = {
             "topEnlaces": "",
             "pageTitle": title,
@@ -133,5 +136,5 @@ def calendario(request, year=date.today().year, month=date.today().month):
         }
         return render(request, "veraPage/calendario.html", context)
     except Exception as e:
-        print(e)
+        logger.error(f'Failed calendar: {e}')
         raise Http404("Error inesperado en la pagina")

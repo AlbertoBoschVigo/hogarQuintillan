@@ -25,4 +25,5 @@ urlpatterns = [
     path('chat/', include("chat.urls")),
     path('recetas/', include("recetas.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
+    path("accounts/registro/", views.registro, name = "registro"),
 ]
