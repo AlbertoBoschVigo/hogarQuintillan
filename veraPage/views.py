@@ -109,7 +109,10 @@ def calendario(request, year=date.today().year, month=date.today().month):
   
     if year < 1900 or year > 2099: year = date.today().year
     try:
-        locale.setlocale(locale.LC_TIME, 'es')
+        try:
+            locale.setlocale(locale.LC_TIME, 'es')
+        except:
+            logger.debug('Locale no valido')
         month_name = datetime.strptime(str(month), "%m").strftime("%B").capitalize()
         title = "Vera's Calendar - %s %s" % (month_name, year)
         calendarios = []
