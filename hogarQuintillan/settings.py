@@ -222,7 +222,7 @@ def get_cache():
         username = os.environ['MEMCACHIER_USERNAME']
         password = os.environ['MEMCACHIER_PASSWORD']
         return {
-            default': {
+            'default': {
                 # Use django-bmemcached
                 'BACKEND': 'django_bmemcached.memcached.BMemcached',
 
@@ -241,9 +241,9 @@ def get_cache():
         }
     except:
         return {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
-        }
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+            }
         }
 
 CACHES = get_cache()
