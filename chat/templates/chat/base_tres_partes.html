@@ -21,9 +21,10 @@
     </head>
     <body class="contenedor-total">
         <div class="container-fluid">
-            <div class="row justify-content-start">
-                <!--<aside class="col-sm-12 col-md-2 col-12">-->
-                <aside class="col-12 col-lg-2 my-4">
+            <!--<div class="row justify-content-start">-->
+            <div class="row">
+                <button aria-controls="nav" aria-expanded="false" class="btn btn-success collapsed d-lg-none etiqueta-mini mt-2 mr-2" data-target="aside > nav" data-toggle="collapse">Menu</button>
+                <aside class="col-12 col-lg-2 my-2">
                     <nav class="collapse d-lg-block">
                         <header>
                             <h3 class="badge badge-dark">{% block headingA %}{% endblock headingA %}</h3>
@@ -54,13 +55,13 @@
                             {% endblock listado %}
                     </nav>
                     
-                    <button aria-controls="nav" aria-expanded="false" class="btn btn-success collapsed d-lg-none etiqueta-mini" data-target="aside > nav" data-toggle="collapse">Menu</button>
+                    
                     
                    
                 </aside>
 
                 <!--<main class="col-sm-12 col-md-7 col-12">-->
-                <main class="col-12 col-lg-7 my-2">
+                <main class="col-12 col-lg-7 my-1">
                     
                     <h1 id='cabeceraCanal'>
                         {% block headingM %}{% endblock headingM %}

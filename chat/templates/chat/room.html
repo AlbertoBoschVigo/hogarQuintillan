@@ -48,7 +48,7 @@
 {% endblock listado %}
 
 {% block bloqueCentral %}
-<h1><span class="badge badge-success etiqueta-mini">{{ room_name|capfirst }}</span></h1>
+<h1><span class="badge badge-success etiqueta-mini d-none d-sm-none d-md-inline-block">{{ room_name|capfirst }}</span></h1>
 <div id="container">
     <textarea id="chat-log" class="form-control" readonly></textarea>
     <div id="usuario" data-user="{{ user.get_username }}" data-canal="Chat principal"></div>

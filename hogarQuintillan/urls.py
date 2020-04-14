@@ -19,7 +19,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name = "index"),
-    path("calendario", views.calendario, name = "calendarioGlobal"),
+    path("calendario", views.calendarioGlobal, name = "calendarioGlobal"),
     path('admin/', admin.site.urls),
     path('vera/', include("veraPage.urls")),
     path('chat/', include("chat.urls")),

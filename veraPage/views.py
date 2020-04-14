@@ -39,7 +39,8 @@ def tareas(request):
                 "ACTIVIDAD DE ESCRITURA": [["mejoro_mi_escritura.pdf",cpt]],
                 "ACTIVIDADES DE REPASO":[["Actividades de repaso.pdf",cpt]],
                 "Algo de ortografía":[["sinonima_antonima.pdf", cpt], ["sonido_r_fuerte.pdf", cpt]],
-                "Escribir una receta":[["ESCRIBIR_UNA_RECETA.pdf", cpt]]
+                "Escribir una receta":[["ESCRIBIR_UNA_RECETA.pdf", cpt]],
+                "HORA DE LECTURA: MI HÉROE ERES TÚ!":[["MI_HÉROE_ERES_TÚ__hablandodelcuento.pdf", pdt], ["My Hero is You, Storybook for Children on COVID-19 (Spanish)_1.pdf", pdt]],
             },
             lg:{
                 "REALIZA UN FOLLETO INFORMATIVO": [["LG_ELABORA_UN_FOLLETO_INFORMATIVO.pdf", cpt]],
@@ -52,6 +53,7 @@ def tareas(request):
                 "Repaso ortografía" : [["aprendo_mais.pdf", cpt], ["signos_interrogacion_admiracion.pdf", cpt]],
                 "Repaso de gramática e ortografía" : [["SILABAS_LG.pdf", cpt], ["SUBSTANTIVOS_LG.pdf", cpt], ["substantivos_interrogacion_admircion.pdf", cpt]],
                 "HAMBURGUESA, BOCADILLOS E ROSQUILLAS":[["HAMBURGUESA_BOCADILLOS_ROSQUILLAS.pdf", cpt]],
+                "ESPRESIÓN ESCRITA": [["EXPRESIÓN_ESCRITA_1.pdf", pdt]]
             },
             mt:{
                 "REPASO":[["mat_ep3_REPASO.pdf", cpt]],
@@ -64,8 +66,10 @@ def tareas(request):
                 "Repaso":[["repaso_numeros.pdf", cpt]],
                 "Repaso division":[["reparto_division_exacta.pdf", cpt]],
                 "JUEGOS Y ACERTIJOS" : [["ACERTIJOS.pdf", cpt], ["juegos_1.pdf", cpt]],
-                "NÚMEROS Y OPERACIONES" : [["numeros_operaciones.pdf", pdt]],
+                "NÚMEROS Y OPERACIONES" : [["numeros_operaciones.pdf", cpt]],
                 "MULTIPLICACIÓN Y DIVISIÓN" : [["multiplicacion_division.pdf", pdt]],
+                "Jugamos y repasamos": [["ACTIVIDAD", pdt]],
+                "JUEGO CON TAPONES PARA REPASAR LAS TABLAS": [["tablacontapon.mp4", pdt]]
             },
             cn:{
                 "Tema3_SOMO DISTINTOS DOUTROS ANIMAIS" : [["t3_cn.pdf", cpt]],

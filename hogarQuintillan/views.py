@@ -9,15 +9,22 @@ from django.views.decorators.cache import cache_page
 
 from datetime import date, datetime
 from calendar import HTMLCalendar, LocaleHTMLCalendar
-import locale, re, time, os
+import locale, re, time, os, sys
 import logging
 
 logger = logging.getLogger(__name__)
 # Create your views here.
+topHeader = [
+    ('calendarioGlobal', 'Calendario'),
+    ('chat_index', 'Chat'),
+    ('recetas_index', 'Recetas')
+]
+rutaInicio = ('index', 'Inicio')
 
 @cache_page(60 * 15)
 def index(request):
-    return render(request, "index.html")
+    activa = sys._getframe().f_code.co_name
+    return render(request, "index.html", {'topHeader': topHeader, 'activa': activa, 'inicio':rutaInicio})
 
 def registro(request):
     if request.method == 'POST':
@@ -36,7 +43,7 @@ def registro(request):
 
 
 @cache_page(60 * 15)
-def calendario(request, year=date.today().year, month=date.today().month):
+def calendarioGlobal(request, year=date.today().year, month=date.today().month):
     year = int(year)
     month = int(month)
   
@@ -44,10 +51,19 @@ def calendario(request, year=date.today().year, month=date.today().month):
     try:
         try:
             locale.setlocale(locale.LC_TIME, 'es')
+            failLocale = False
         except:
+            failLocale = True
             logger.debug('Locale no valido')
         month_name = datetime.strptime(str(month), "%m").strftime("%B").capitalize()
+        eng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        spa = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+
+        
         title = "Nuestro Calendario - %s %s" % (month_name, year)
+
+        if failLocale:
+            title = title.replace(eng[month-1],spa[month-1])
         calendarios = []
         for i in range(month,13):
             cal = HTMLCalendar().formatmonth(year, i)
@@ -61,14 +77,17 @@ def calendario(request, year=date.today().year, month=date.today().month):
 
             calendarios.append((datetime.strptime(str(i), "%m").strftime("%B").capitalize(), cal))
 
-
+        
         context = {
-            "topEnlaces": "",
+            'activa': sys._getframe().f_code.co_name, 
+            'inicio':rutaInicio,
+            'topHeader': topHeader,
             "pageTitle": title,
             "calendarios": calendarios,
             "numeroMes": 1,
             "nombreMes": month_name,
         }
+        logger.debug(context)
         return render(request, "calendario.html", context)
     except Exception as e:
         logger.error(f'Failed calendar: {e}')

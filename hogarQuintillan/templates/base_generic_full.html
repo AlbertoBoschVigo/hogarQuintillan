@@ -25,25 +25,31 @@
     <body>
         <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
         <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
-        <div id="wrapper" class="container">
-            <header id="header" class="row">
-                <div id="top_menu" class="col-6">
+        {% if user and user.is_authenticated and topHeader %}
+            {% include 'navbars.html'%}
+        {% endif %}
+        <div id="wrapper" class="container-fluid">
+            {% block header %}
+                <header id="header" class="row">
+                
+                    <div id="top_menu" class="col-6">
 
-                </div>
-                <div id="logo" class="col text-right">
-                    {% block cabeceraDerecha %}
-                    {% endblock %}
-                </div>
-                    
-            </header>
-            
+                    </div>
+                    <div id="logo" class="col text-right">
+                        {% block cabeceraDerecha %}
+                        {% endblock %}
+                    </div>
+                   
+                </header>
+            {% endblock %}
+            <div class="row mt-3">
 
                 
 
                     {% block bloqueCentral %}
                     {% endblock %}
-
-            <footer id="footer">
+            </div>
+            <footer id="footer" class="sticky-bottom">
                 Copyright &copy;
                 
                 <script type="text/JavaScript">
