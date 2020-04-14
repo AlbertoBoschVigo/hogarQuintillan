@@ -44,7 +44,7 @@
 {% endblock creacion %}
 
 {% block listado %}
-<div class="p-6 mb-2 bg-secondary text-white etiqueta-mini">&nbsp;Usuarios en el canal:</div><ul id="listaUsuarios"></ul>
+<div class="p-6 mb-2 bg-secondary text-white etiqueta-mini" id="infoChat" data-canal="chat_{{ room_name }}" data-user="{{ user.get_username }}">&nbsp;Usuarios en el canal:</div><ul id="listaUsuarios"></ul>
 {% endblock listado %}
 
 {% block bloqueCentral %}

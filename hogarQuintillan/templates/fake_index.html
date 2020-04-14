@@ -1,0 +1,38 @@
+{% extends 'base_generic_full.html' %}
+
+{% block bloqueCentral %}
+<section id="main" class="col-sm-9 col-md-7 col-lg-5 mx-auto my-3 text-center">
+  <div id="carouselExampleSlidesOnly" class="carousel slide mt-1" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <h1 class="alert alert-primary text-center" role="alert">
+          Nothing to see 1
+        </h1>
+          
+      </div>
+      <div class="carousel-item">
+        <h1 class="alert alert-warning text-center" role="alert">
+          Nothing to see 2
+        </h1>
+
+      </div>
+      <div class="carousel-item">
+        <h1 class="alert alert-danger text-center" role="alert">
+          Nothing to see 3
+        </h1>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer%}
+    Copyright &copy;
+    
+    <script type="text/JavaScript">
+        document.write(new Date().getFullYear());                    
+    </script> Quintillan's
+    <div><a href="{% url "login" %}"><strong>{% now "d-m-y" %}</strong></a></div>
+
+{% endblock %}

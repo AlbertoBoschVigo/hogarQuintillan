@@ -12,15 +12,15 @@ document.addEventListener('DOMContentLoaded', function (){
         + roomName
         + '/'
     );
-
+    
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        console.log(data);
         if(data.users){
             document.getElementById("listaUsuarios").innerHTML = "";
             data.users.forEach(elemento => {
                 var ul = document.getElementById("listaUsuarios");
                 var li = document.createElement("li");
+                var inf = document.getElementById("infoChat").dataset.user;
                 const aTag = document.createElement('a');
                 //console.log(elemento);
                 aTag.appendChild(document.createTextNode(elemento));
@@ -28,7 +28,13 @@ document.addEventListener('DOMContentLoaded', function (){
                 aTag.setAttribute("href","javascript:void(0)"); 
                 aTag.setAttribute("onclick", `privadoEnlace("${elemento}");`);
                 //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
-                aTag.className = "badge badge-light enlace-usuario";
+                if (elemento == inf){
+                    aTag.className = "badge badge-dark enlace-usuario";
+                }
+                else{
+                    aTag.className = "badge badge-light enlace-usuario";
+                }
+                
                 li.appendChild(aTag);
                 ul.appendChild(li);
             });
@@ -37,12 +43,20 @@ document.addEventListener('DOMContentLoaded', function (){
                 data.chats.forEach(elemento => {
                     var ul = document.getElementById("listaCanales");
                     var li = document.createElement("li");
+                    var inf = document.getElementById("infoChat").dataset.canal;
                     const aTag = document.createElement('a');
                     aTag.appendChild(document.createTextNode(elemento.replace("chat_", "")));
                     aTag.setAttribute("id", elemento);
                     aTag.setAttribute("href", window.location.protocol + "//" + window.location.host + "/chat/" + elemento.replace("chat_", ""));
                     //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
-                    aTag.className = "badge badge-light enlace-chat";
+                    if (elemento == inf){
+                        aTag.className = "badge badge-dark enlace-chat";
+                    }
+                    else
+                    {
+                        aTag.className = "badge badge-info enlace-chat";
+                    }
+                    
                     li.appendChild(aTag);
                     ul.appendChild(li);
                 });
@@ -53,12 +67,20 @@ document.addEventListener('DOMContentLoaded', function (){
             data.chats.forEach(elemento => {
                 var ul = document.getElementById("listaCanales");
                 var li = document.createElement("li");
+                var inf = document.getElementById("infoChat").dataset.canal;
                 const aTag = document.createElement('a');
                 aTag.appendChild(document.createTextNode(elemento.replace("chat_", "")));
                 aTag.setAttribute("id", elemento);
                 aTag.setAttribute("href", window.location.protocol + "//" + window.location.host + "/chat/" + elemento.replace("chat_", ""));
                 //aTag.setAttribute("class", "badge badge-secondary enlace-chat");
-                aTag.className = "badge badge-light enlace-chat";
+                if (elemento == inf){
+                    aTag.className = "badge badge-dark enlace-chat";
+                }
+                else
+                {
+                    console.log('pues no');
+                    aTag.className = "badge badge-info enlace-chat";
+                }
                 li.appendChild(aTag);
                 ul.appendChild(li);
             });

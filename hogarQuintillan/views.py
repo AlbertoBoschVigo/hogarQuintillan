@@ -21,10 +21,14 @@ topHeader = [
 ]
 rutaInicio = ('index', 'Inicio')
 
-@cache_page(60 * 15)
 def index(request):
     activa = sys._getframe().f_code.co_name
-    return render(request, "index.html", {'topHeader': topHeader, 'activa': activa, 'inicio':rutaInicio})
+    if request.user.is_authenticated:
+        logger.debug('Usuario autenticado')
+        return render(request, "index.html", {'topHeader': topHeader, 'activa': activa, 'inicio':rutaInicio})
+    else:
+        logger.debug('Usuario no autenticado')
+        return render(request, "fake_index.html")
 
 def registro(request):
     if request.method == 'POST':
@@ -87,7 +91,6 @@ def calendarioGlobal(request, year=date.today().year, month=date.today().month):
             "numeroMes": 1,
             "nombreMes": month_name,
         }
-        logger.debug(context)
         return render(request, "calendario.html", context)
     except Exception as e:
         logger.error(f'Failed calendar: {e}')

@@ -25,7 +25,7 @@
     <body>
         <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
         <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
-        {% if user and user.is_authenticated and topHeader %}
+        {% if topHeader %}
             {% include 'navbars.html'%}
         {% endif %}
         <div id="wrapper" class="container">

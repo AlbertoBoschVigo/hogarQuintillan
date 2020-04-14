@@ -25,7 +25,7 @@
     <body>
         <button  id="myBtnTopR" class="myBtnTop" title="Go to top">Top</button>
         <button  id="myBtnTopL" class="myBtnTop" title="Go to top">Top</button>
-        {% if user and user.is_authenticated and topHeader %}
+        {% if topHeader %}
             {% include 'navbars.html'%}
         {% endif %}
         <div id="wrapper" class="container-fluid">
@@ -50,13 +50,14 @@
                     {% endblock %}
             </div>
             <footer id="footer" class="sticky-bottom">
-                Copyright &copy;
-                
-                <script type="text/JavaScript">
-                    document.write(new Date().getFullYear());                    
-                </script> Quintillan's
-                <div><a href="{% url "calendarioGlobal" %}"><strong>{% now "d-m-y" %}</strong></a></div>
                 {% block footer%}
+                    Copyright &copy;
+                    
+                    <script type="text/JavaScript">
+                        document.write(new Date().getFullYear());                    
+                    </script> Quintillan's
+                    <div><a href="{% url "calendarioGlobal" %}"><strong>{% now "d-m-y" %}</strong></a></div>
+                
                 {% endblock %}
             </footer>
 
