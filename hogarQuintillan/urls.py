@@ -15,8 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
 
+class contextoBase():
+    def __init__(self, **kwargs):
+        topHeader = [
+            ('calendarioGlobal', 'Calendario'),
+            ('chat_index', 'Chat'),
+            ('recetas_index', 'Recetas'),
+            ('vera_tareas', 'TareasV')
+        ]
+        rutaInicio = ('index', 'Inicio')
+        self.contextoBase = {
+            'topHeader': topHeader,
+            'inicio': rutaInicio,
+            'pageTitle':'Hogar Quintillan'
+        }
+        self.add(**kwargs)
+    
+    def add(self, **kwargs):
+        for k,v in kwargs.items():
+            self.contextoBase[k] = v
+    
+    def get(self):
+        return self.contextoBase
+
+from . import views
 urlpatterns = [
     path("", views.index, name = "index"),
     path("calendario", views.calendarioGlobal, name = "calendarioGlobal"),

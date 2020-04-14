@@ -14,10 +14,13 @@ document.addEventListener('DOMContentLoaded', function (){
 
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = () => {
-        //console.log('OnScroll');
         if (window.scrollY >= 20) {
-            //console.log('Muestro boton');
-            mybuttonR.style.display = "block";   
+            if (window.outerWidth > 699){
+                mybuttonR.style.display = "block";
+            }
+            else{
+                mybuttonR.style.display = "none";
+            }
             mybuttonL.style.display = "block";
         }
         else{

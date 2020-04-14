@@ -6,6 +6,8 @@ from django.views.decorators.cache import cache_page
 
 from .models import Receta, IngredienteReceta, Categoria
 
+from hogarQuintillan.urls import contextoBase
+
 import logging
 
 # Create your views here.
@@ -20,11 +22,11 @@ def index(request):
         logger.debug(f'Categorias disponibles: {categorias}')
         for categoria in categorias:
             listaCat.append(categoria.nombre)
-        context = {
-            'categorias': listaCat
-        }
-        return render(request, "recetas/recetas_index.html", context)
-    except:
+
+        _context = contextoBase(categorias = listaCat)
+        return render(request, "recetas/recetas_index.html", _context.get())
+    except Exception as e:
+        logger.debug(e)
         return HttpResponse('Activo')
 
 @cache_page(60 * 15)
@@ -38,14 +40,10 @@ def receta(request, idReceta, categoria = ''):
         raise Http404("Esa receta no existe")
     if categoria != '' and categoria != str(receta.categoria):
         raise Http404("Esa receta no cuadra en esta categoria")
+    
+    _context = contextoBase(receta = receta, ingredientes = ingredientes, categorias = categorias, categoria = str(receta.categoria))
 
-    context = {
-        "receta": receta,
-        "ingredientes": ingredientes,
-        "categorias": categorias,
-        "categoria":str(receta.categoria)
-    }
-    return render(request, "recetas/receta.html", context)
+    return render(request, "recetas/receta.html", _context.get())
     
 @cache_page(60 * 15)
 def categoria(request, categoria):
@@ -57,8 +55,6 @@ def categoria(request, categoria):
         except Categoria.DoesNotExist:
             logger.info(f'Categoria {categoria} solicitada no existe')
             raise Http404("Esa categoria no existe")
-        context = {
-            "categoria": cat.nombre
-        }
+        _context = contextoBase(categoria = cat.nombre)
 
-    return render(request, "recetas/recetas_categorias.html", context)
+    return render(request, "recetas/recetas_categorias.html", _context.get())

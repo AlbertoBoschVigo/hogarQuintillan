@@ -12,20 +12,17 @@ from calendar import HTMLCalendar, LocaleHTMLCalendar
 import locale, re, time, os, sys
 import logging
 
+from .urls import contextoBase
+
 logger = logging.getLogger(__name__)
 # Create your views here.
-topHeader = [
-    ('calendarioGlobal', 'Calendario'),
-    ('chat_index', 'Chat'),
-    ('recetas_index', 'Recetas')
-]
-rutaInicio = ('index', 'Inicio')
+
 
 def index(request):
-    activa = sys._getframe().f_code.co_name
     if request.user.is_authenticated:
         logger.debug('Usuario autenticado')
-        return render(request, "index.html", {'topHeader': topHeader, 'activa': activa, 'inicio':rutaInicio})
+        _contexto = contextoBase(activa=sys._getframe().f_code.co_name)
+        return render(request, "index.html", _contexto.get())
     else:
         logger.debug('Usuario no autenticado')
         return render(request, "fake_index.html")
@@ -81,17 +78,10 @@ def calendarioGlobal(request, year=date.today().year, month=date.today().month):
 
             calendarios.append((datetime.strptime(str(i), "%m").strftime("%B").capitalize(), cal))
 
+        _contexto = contextoBase(activa = sys._getframe().f_code.co_name)
+        _contexto.add(pageTitle = title, calendarios = calendarios, numeroMes =1, nombreMes = month_name)
         
-        context = {
-            'activa': sys._getframe().f_code.co_name, 
-            'inicio':rutaInicio,
-            'topHeader': topHeader,
-            "pageTitle": title,
-            "calendarios": calendarios,
-            "numeroMes": 1,
-            "nombreMes": month_name,
-        }
-        return render(request, "calendario.html", context)
+        return render(request, "calendario.html", _contexto.get())
     except Exception as e:
         logger.error(f'Failed calendar: {e}')
         raise Http404('Failed calendar')
