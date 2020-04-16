@@ -68,8 +68,8 @@ def tareas(request):
                 "JUEGOS Y ACERTIJOS" : [["ACERTIJOS.pdf", cpt], ["juegos_1.pdf", cpt]],
                 "NÚMEROS Y OPERACIONES" : [["numeros_operaciones.pdf", cpt]],
                 "MULTIPLICACIÓN Y DIVISIÓN" : [["multiplicacion_division.pdf", cpt]],
-                "Jugamos y repasamos": [["ACTIVIDAD", pdt]],
-                "JUEGO CON TAPONES PARA REPASAR LAS TABLAS": [["tablacontapon.mp4", pdt]]
+                "Jugamos y repasamos": [["ACTIVIDAD", cpt]],
+                "JUEGO CON TAPONES PARA REPASAR LAS TABLAS": [["tablacontapon.mp4", cpt]]
             },
             cn:{
                 "Tema3_SOMO DISTINTOS DOUTROS ANIMAIS" : [["t3_cn.pdf", cpt]],

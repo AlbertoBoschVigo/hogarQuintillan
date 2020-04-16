@@ -42,18 +42,51 @@ def read_env():
             os.environ.setdefault(key, val)
 
 LOGGING = {
-    #Gestiona por consola todos los logging calls 'DEBUG' < 'INFO' < 'WARNING' < 'ERROR' < 'CRITICAL'
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'DEBUG',
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
     },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'production': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['production'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        '{{ project_name }}.custom': {
+            'handlers': ['console', 'production'],
+            'level': 'DEBUG',
+        }
+    }
 }
 read_env()
 
@@ -85,6 +118,7 @@ INSTALLED_APPS = [
     'veraPage.apps.VerapageConfig',
     'chat.apps.ChatConfig',
     'recetas.apps.RecetasConfig',
+    'memos.apps.MemosConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
