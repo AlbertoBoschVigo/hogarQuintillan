@@ -12,7 +12,7 @@ from calendar import HTMLCalendar, LocaleHTMLCalendar
 import locale, re, time, os, sys
 import logging
 
-from .urls import contextoBase
+from .clase_contexto import contextoBase
 
 logger = logging.getLogger(__name__)
 # Create your views here.

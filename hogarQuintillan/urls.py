@@ -14,39 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-
-class contextoBase():
-    def __init__(self, **kwargs):
-        topHeader = [
-            ('calendarioGlobal', 'Calendario'),
-            ('chat_index', 'Chat'),
-            ('recetas_index', 'Recetas'),
-            ('vera_tareas', 'TareasV')
-        ]
-        rutaInicio = ('index', 'Inicio')
-        self.contextoBase = {
-            'topHeader': topHeader,
-            'inicio': rutaInicio,
-            'pageTitle':'Hogar Quintillan'
-        }
-        self.add(**kwargs)
-    
-    def add(self, **kwargs):
-        for k,v in kwargs.items():
-            self.contextoBase[k] = v
-    
-    def get(self):
-        return self.contextoBase
+from django.urls import path, include, re_path
 
 from . import views
+
 urlpatterns = [
     path("", views.index, name = "index"),
-    path("calendario", views.calendarioGlobal, name = "calendarioGlobal"),
+    path("calendario/", views.calendarioGlobal, name = "calendarioGlobal"),
     path('admin/', admin.site.urls),
     path('vera/', include("veraPage.urls")),
     path('chat/', include("chat.urls")),
     path('recetas/', include("recetas.urls")),
+    path('memos/', include("memos.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
     path("accounts/registro/", views.registro, name = "registro"),
 ]

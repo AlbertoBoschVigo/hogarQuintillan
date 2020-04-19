@@ -1,0 +1,37 @@
+{% extends 'memos/base.html' %}
+
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Memos</li>
+  </ol>
+</nav>
+<div>
+<p>
+    <a href="{% url "memos:new" %}">Agregar memo</a>
+</p>
+</div>
+{% endblock %}
+{% block bloqueCentral %}
+<div class="row mt-3 justify-content-center">
+
+    {% for memo in memo_list %}
+
+        <div class="card border-success mx-1 my-1" style="width: 18rem;">
+            <div class="card-body border-success">
+                <h5 class="card-title">{{ memo.titulo }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ memo.creador }}</h6>
+                <p class="card-text">{{ memo.detalle|truncatechars:55 }}</p>
+                <a href="{% url "memos:detail" memo.id%}" class="card-link">Ver</a>
+                <a href="{% url "memos:edit" memo.id %}" class="card-link">Editar</a>
+                <a href="{% url "memos:delete" memo.id %}" class="card-link">Borrar</a>
+            </div>
+
+            <div class="card-footer bg-transparent border-success">{{ memo.fecha_limite|date:"SHORT_DATETIME_FORMAT"|default:"Sin fecha limite" }}</div>   
+        </div>
+    {% empty %}
+    <p>No hay memos disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}

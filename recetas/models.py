@@ -45,7 +45,7 @@ class Receta(models.Model):
     nombre = models.CharField(max_length=64)
     descripcion = models.CharField(max_length=64, blank=True)
     elaboracion = models.TextField()
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="categoria")
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="recetas")
     dificultad = models.CharField(max_length=64, blank=True, choices=DIFICULTAD)
     comensales = models.IntegerField(default=2)
     tiempoPreparacion = models.DurationField(blank=True, default=timedelta(hours=2))
@@ -56,8 +56,8 @@ class Receta(models.Model):
 
 
 class IngredienteReceta(models.Model):
-    ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name="ingrediente")
-    receta = models.ForeignKey(Receta, on_delete=models.CASCADE, related_name="receta")
+    ingrediente = models.ForeignKey(Ingrediente, on_delete=models.CASCADE, related_name="ingredientes_recetas")
+    receta = models.ForeignKey(Receta, on_delete=models.CASCADE, related_name="ingredientes_recetas")
     cantidad = models.CharField(max_length=64)
 
     def __str__(self):

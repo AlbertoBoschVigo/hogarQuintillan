@@ -1,0 +1,46 @@
+{% extends 'memos/base.html' %}
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'memos:list'%}">Memos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Detalle</li>
+  </ol>
+</nav>
+{% endblock %}
+
+{% block bloqueCentral %}
+  <!--fields = ['titulo', 'dirigido', 'detalle', 'categoria', 'tags', 'cita', 'fecha_cita', 'fecha_limite', 'padre']-->
+  <div class="etiqueta-texto">
+  <h4>{{ memo.titulo }}</h4>
+  <br>
+  <h5>{{ memo.detalle }}</h5>
+  <br>
+  <br>
+  <p>Dirigido a: <i>{{ memo.dirigido.all|join:" , "|capfirst }}</i></p>
+  <p>Creador: <i>{{ memo.creador|capfirst }}</i></p>
+  <p>Categoria: <i>{{ memo.get_categoria_display }}</i></p>
+  <p>Creado: <i>{{ memo.fecha_creacion }}</i></p>
+  <p>Fecha limite: <i>{{ memo.fecha_limite|default:"No tiene" }}</i></p>
+  <p>Fecha cita: <i>{{ memo.fecha_cita|default:"No tiene" }}</i></p>
+  {% if memo.padre %}
+  <label>Padre:</label>
+  <div class="etiqueta-texto">
+    <p>{{ memo.padre.titulo }}</p>
+    <p>{{ memo.padre.detalle }}</p>
+    <a href="{% url "memos:detail" memo.padre.id %}">Ir al padre</a>
+  </div>
+  {% endif %}
+  {% if memo.hijos.all %}
+    <label>Hijos:</label>
+    {% for hijo in memo.hijos.all %}
+      <div class="etiqueta-texto">
+        <p>{{ hijo.titulo }}</p>
+        <p>{{ hijo.detalle }}</p>
+        <a href="{% url "memos:detail" hijo.id %}">Ir al hijo</a>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+
+{% endblock %}

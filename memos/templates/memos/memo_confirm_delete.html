@@ -1,0 +1,8 @@
+{% extends 'memos/base.html' %}
+
+{% block bloqueCentral %}
+   <form method="post">{% csrf_token %}
+    ¿Estás seguro que deseas borrar el curso "{{ object }}"?
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'memos/base.html' %}
+{% block head %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function (){
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })
+        document.querySelectorAll('.form-label-group').forEach(divs => {
+        var inp = divs.children[0];
+        var lab = divs.children[1];
+        var eti = divs.children[2];
+        inp.className = "form-control";
+        inp.value = "";
+        //inp.setAttribute('name', inp.id)
+        lab.setAttribute('for', inp.id);
+        if(eti){
+            console.log('entra');
+            inp.setAttribute('data-toggle', "tooltip");
+            inp.setAttribute('data-placement', "bottom");
+            inp.setAttribute('data-html', "true");
+            inp.setAttribute('title', eti.dataset.men);
+        }
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'memos:list'%}">Memos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+    {{ titulo }}
+    </li>
+  </ol>
+</nav>
+{% endblock %}
+{% block bloqueCentral %}
+<div class="row">
+    <form method="post">
+    {% csrf_token %}
+    <!--fields=(titulo;dirigido;detalle;categoria;tags;cita;fecha_cita;fecha_limite;padre)-->
+    {% for field in form %}
+        <p>{{ field.value }}</p>
+        {% cycle '<div class="form-row">' '' '' %}
+        <div class="col-12 col-md-9 col-xl-7 mb-3 offset-md-2 offset-xl-3">
+            <div class="form-label-group">
+            {{ field }}
+            {{ field.label_tag }}
+            
+            {% if field.help_text%}
+            <span data-men="{{ field.help_text }}" style="visibility: hidden"></span>
+            {% endif %}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            </div>
+        </div>
+        
+        {% cycle '' '' '</div>' %}
+
+    {% endfor %}
+    </div>
+    <button class="btn btn-success" type="submit">Enviar</button>
+
+    </form>
+</div>
+  
+{% endblock %}

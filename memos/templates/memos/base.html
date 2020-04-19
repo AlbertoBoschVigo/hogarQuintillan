@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Los dichosos memos{% endblock %}</title>
+        <link href="{% static 'memos/css/memos_style.css' %}" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+
+
+        <!-- BOOTSTRAP-->
+        {# Cargamos la librería #}
+	    {% load bootstrap4 %}
+ 
+	    {# CSS Bootstrap #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+    <!-- /BOOTSTRAP-->
+        {% block head %}
+        {% endblock %}
+    </head>
+
+<body>
+<div id="wrapper" class="container-fluid">
+            {% block header %}
+                <header id="header" class="row">
+                   
+                </header>
+            {% endblock %}
+            
+                {% block bloqueCentral %}
+                {% endblock %}
+
+                {% block footer%}
+                
+                {% endblock %}
+
+        </div>
+</body>
+</html>

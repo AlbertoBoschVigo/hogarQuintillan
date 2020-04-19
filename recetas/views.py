@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 
 from .models import Receta, IngredienteReceta, Categoria
 
-from hogarQuintillan.urls import contextoBase
+from hogarQuintillan.clase_contexto import contextoBase
 
 import logging
 
