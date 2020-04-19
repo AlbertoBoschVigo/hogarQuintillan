@@ -10,7 +10,7 @@
         var lab = divs.children[1];
         var eti = divs.children[2];
         inp.className = "form-control";
-        inp.value = "";
+        //inp.value = "";
         //inp.setAttribute('name', inp.id)
         lab.setAttribute('for', inp.id);
         if(eti){
@@ -42,9 +42,8 @@
     {% csrf_token %}
     <!--fields=(titulo;dirigido;detalle;categoria;tags;cita;fecha_cita;fecha_limite;padre)-->
     {% for field in form %}
-        <p>{{ field.value }}</p>
         {% cycle '<div class="form-row">' '' '' %}
-        <div class="col-12 col-md-9 col-xl-7 mb-3 offset-md-2 offset-xl-3">
+        <div class="col-12 col-md-9 col-xl-7 mb-3 offset-md-3 offset-xl-5">
             <div class="form-label-group">
             {{ field }}
             {{ field.label_tag }}

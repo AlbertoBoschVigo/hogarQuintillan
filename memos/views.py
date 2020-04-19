@@ -56,7 +56,7 @@ class MemoDetail(DetailView):
 class MemoCreation(LoginRequiredMixin, CreateView):
     model = Memo
     success_url = reverse_lazy('memos:list')
-    fields = ['titulo', 'dirigido', 'detalle', 'categoria', 'tags', 'cita', 'fecha_cita', 'fecha_limite', 'padre']
+    fields = ['titulo', 'dirigido', 'detalle', 'categoria', 'prioridad', 'tags', 'cita', 'fecha_cita', 'fecha_limite', 'padre']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,32 +70,16 @@ class MemoCreation(LoginRequiredMixin, CreateView):
 class MemoUpdate(LoginRequiredMixin, UpdateView):
     model = Memo
     success_url = reverse_lazy('memos:list')
-    fields = ['detalle', 'tags', 'fecha_cita','fecha_limite', 'padre', 'completada', 'ignorar']
+    fields = ['detalle', 'tags', 'fecha_cita','fecha_limite','prioridad', 'padre', 'completada', 'ignorar']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Editar'
-        logger.info(context)
         return context
 
     def get_initial(self, **kwargs):
         initial = super().get_initial(**kwargs)
-        logger.info(initial)
         return initial
-
-    def get_form(self, **kwargs):
-        logger.info('GET_FORM')
-        form = super().get_form(**kwargs)
-        for row in form:
-            for col in row:
-                logger.info(col)
-        return form
-
-    def get_form_class(self, **kwargs):
-        form = super().get_form_class(**kwargs)
-        logger.info('GET_FORM_CLASS')
-        logger.info(form)
-        return form
 
     def form_valid(self, form):
         form.instance.creador = self.request.user

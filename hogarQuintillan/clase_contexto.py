@@ -4,6 +4,7 @@ class contextoBase():
             ('calendarioGlobal', 'Calendario'),
             ('chat_index', 'Chat'),
             ('recetas_index', 'Recetas'),
+            ('memos:list', 'Memos'),
             ('vera_tareas', 'TareasV')
         ]
         rutaInicio = ('index', 'Inicio')

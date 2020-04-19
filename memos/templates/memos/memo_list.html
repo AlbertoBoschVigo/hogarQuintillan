@@ -17,9 +17,14 @@
 <div class="row mt-3 justify-content-center">
 
     {% for memo in memo_list %}
-
+        {% if memo.prioridad == "al" %}
+        <div class="card border-danger mx-1 my-1" style="width: 18rem;">
+        {% else %}
         <div class="card border-success mx-1 my-1" style="width: 18rem;">
-            <div class="card-body border-success">
+        {% endif %}
+            
+            <div class="card-body">
+            
                 <h5 class="card-title">{{ memo.titulo }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ memo.creador }}</h6>
                 <p class="card-text">{{ memo.detalle|truncatechars:55 }}</p>
@@ -27,8 +32,13 @@
                 <a href="{% url "memos:edit" memo.id %}" class="card-link">Editar</a>
                 <a href="{% url "memos:delete" memo.id %}" class="card-link">Borrar</a>
             </div>
-
-            <div class="card-footer bg-transparent border-success">{{ memo.fecha_limite|date:"SHORT_DATETIME_FORMAT"|default:"Sin fecha limite" }}</div>   
+            {% if memo.prioridad == "al" %}
+            <div class="card-footer bg-transparent border-danger">
+            {% else %}
+            <div class="card-footer bg-transparent border-success">
+            {% endif %}
+            
+            {{ memo.fecha_limite|date:"SHORT_DATETIME_FORMAT"|default:"Sin fecha limite" }}</div>   
         </div>
     {% empty %}
     <p>No hay memos disponibles.</p>
