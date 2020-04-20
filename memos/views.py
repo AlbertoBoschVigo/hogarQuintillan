@@ -12,6 +12,8 @@ from django.shortcuts import get_object_or_404
 
 from django.db.models import Q
 
+from django.conf import settings
+
 import logging
 #from django.contrib.auth.models import User
 
@@ -36,9 +38,12 @@ class MemoList(ListView):
         from django.utils import timezone
         import datetime
         tomorrow = timezone.now().date() + datetime.timedelta(days=1)
-        return Memo.objects.filter(
-            Q(fecha_limite__lt=tomorrow)|Q(fecha_limite__isnull=True)
-        )
+        if settings.DEBUG or self.request.user.is_authenticated:
+            return Memo.objects.filter(
+                Q(fecha_limite__lt=tomorrow)|Q(fecha_limite__isnull=True)
+            )
+        else:
+            return Memo.objects.none()
 
 class MemoDetail(DetailView):
     model = Memo

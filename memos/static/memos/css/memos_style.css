@@ -21,9 +21,10 @@
 }
 #wrapper {
     margin-top: 10px;
-    margin-left: auto;
-    /*margin-left: 3rem;*/
-    margin-right: auto;
+    /*margin-left: auto;*/ /*cambiado pargin por padding*/
+    padding-left: 10px;
+    /*margin-right: auto;*/ /*cambiado pargin por padding*/
+    padding-right: 10px;
     background-color: #FFFFFF;
     min-height: 70vh;
 }
@@ -117,6 +118,7 @@ div a {
 }
 
 .etiqueta {
+    box-sizing: border-box;
     margin-bottom: 12px;
     margin-left: 5px;
     margin-right: 5px;
@@ -128,6 +130,7 @@ div a {
 }
 
 .etiqueta-texto{
+    box-sizing: border-box;
     margin-bottom: 12px;
     margin-left: 5px;
     margin-right: 5px;

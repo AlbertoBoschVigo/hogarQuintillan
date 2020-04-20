@@ -6,20 +6,35 @@
         $('[data-toggle="tooltip"]').tooltip()
         })
         document.querySelectorAll('.form-label-group').forEach(divs => {
-        var inp = divs.children[0];
-        var lab = divs.children[1];
-        var eti = divs.children[2];
-        inp.className = "form-control";
-        //inp.value = "";
-        //inp.setAttribute('name', inp.id)
-        lab.setAttribute('for', inp.id);
-        if(eti){
-            console.log('entra');
-            inp.setAttribute('data-toggle', "tooltip");
-            inp.setAttribute('data-placement', "bottom");
-            inp.setAttribute('data-html', "true");
-            inp.setAttribute('title', eti.dataset.men);
-        }
+            var inp = divs.children[1];
+            var lab = divs.children[0];
+            var eti = divs.children[2]; 
+            if (inp.type == "checkbox"){
+                divs.className = "form-check";
+                divs.classList.add('text-center');
+                inp.className = "form-check-input";
+                var lab2 = lab.cloneNode(true);
+                lab2.className = "form-check-label";
+                lab2.innerHTML = lab2.innerHTML.slice(0, -1);
+                divs.appendChild(lab2);
+                divs.removeChild(lab);
+            }
+            else{
+                inp.className = "form-control";
+            }
+            divs.classList.add('my-1');
+            //inp.value = "";
+            //inp.setAttribute('name', inp.id)
+            //lab.setAttribute('for', inp.id);
+            if(eti){
+                console.log('entra');
+                /*
+                inp.setAttribute('data-toggle', "tooltip");
+                inp.setAttribute('data-placement', "bottom");
+                inp.setAttribute('data-html', "true");
+                inp.setAttribute('title', eti.dataset.men);
+                */
+            }
         });
     });
     </script>
@@ -35,35 +50,62 @@
     </li>
   </ol>
 </nav>
+<p>
+    <a href="#" id="button-go-back">Volver</a>
+</p>
 {% endblock %}
 {% block bloqueCentral %}
 <div class="row">
-    <form method="post">
+    <!--<div class="card card-signin my-5 mb-3 offset-md-2 offset-xl-3">-->
+    <!--<div class="card card-signin my-auto mx-auto">-->
+    <!--<div class="card-body etiqueta">-->
+    <div class="etiqueta my-auto mx-auto p-2">
+      <h5 class="text-center">{{ titulo }} memo</h5>
+    <form class="form-signin" method="post">
     {% csrf_token %}
     <!--fields=(titulo;dirigido;detalle;categoria;tags;cita;fecha_cita;fecha_limite;padre)-->
-    {% for field in form %}
-        {% cycle '<div class="form-row">' '' '' %}
-        <div class="col-12 col-md-9 col-xl-7 mb-3 offset-md-3 offset-xl-5">
-            <div class="form-label-group">
-            {{ field }}
-            {{ field.label_tag }}
-            
-            {% if field.help_text%}
-            <span data-men="{{ field.help_text }}" style="visibility: hidden"></span>
-            {% endif %}
-            {% for error in field.errors %}
-            <p style="color: red">{{ error }}</p>
-            {% endfor %}
-            </div>
+
+    <!--
+        <div>
+        <p>label - {{ field.label }}</p>
+        <p>label_tag - {{ field.label_tag }}</p>
+        <p>id_for_label - {{ field.id_for_label }}</p>
+        <p>value - {{ field.value }}</p>
+        <p>html_name - {{ field.html_name }}</p>
+        <p>help_text - {{ field.help_text }}</p>
+        <p>field- {{ field.field }}</p>
+        <p>field.auto_id- {{ field.field.auto_id }}</p>
+        <p>field.required - {{ field.field.required }}</p>
+        <p>field.label - {{ field.field.label }}</p>
+        <p>field.initial - {{ field.field.initial }}</p>
+        <p>field.widget - {{ field.field.widget.class }}</p>
+        <p>field.widget.attrs - {{ field.field.widget.attrs }}</p>
         </div>
+    -->
+    
+    {% for field in form %}
+    
+        <div class="form-label-group">
+        {{ field.label_tag }}
+        {{ field }}
         
-        {% cycle '' '' '</div>' %}
+        
+        {% if field.help_text%}
+        <span data-men="{{ field.help_text }}" style="visibility: hidden"></span>
+        {% endif %}
+        {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        </div>
+
 
     {% endfor %}
+    <div class="text-center">
+        <button class="btn mx-auto btn-success" type="submit">Enviar</button>
     </div>
-    <button class="btn btn-success" type="submit">Enviar</button>
 
     </form>
 </div>
+
   
 {% endblock %}

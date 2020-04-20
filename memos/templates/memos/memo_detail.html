@@ -7,6 +7,9 @@
     <li class="breadcrumb-item active" aria-current="page">Detalle</li>
   </ol>
 </nav>
+<p>
+    <a href="#" id="button-go-back">Volver</a>
+</p>
 {% endblock %}
 
 {% block bloqueCentral %}
@@ -23,6 +26,10 @@
   <p>Creado: <i>{{ memo.fecha_creacion }}</i></p>
   <p>Fecha limite: <i>{{ memo.fecha_limite|default:"No tiene" }}</i></p>
   <p>Fecha cita: <i>{{ memo.fecha_cita|default:"No tiene" }}</i></p>
+  <p>
+  <a href="{% url "memos:edit" memo.id %}" class="card-link">Editar</a>
+  <a href="{% url "memos:delete" memo.id %}" class="card-link">Borrar</a>
+  </p>
   {% if memo.padre %}
   <label>Padre:</label>
   <div class="etiqueta-texto">
