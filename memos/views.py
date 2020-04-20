@@ -38,9 +38,11 @@ class MemoList(ListView):
     template_name = 'memos/memo_list.html'
     #paginate_by = 2
     def get_queryset(self):
+        """
         from django.utils import timezone
         import datetime
         tomorrow = timezone.now().date() + datetime.timedelta(days=1)
+        """
         if settings.DEBUG:
             return Memo.objects.all().order_by('prioridad')
 
@@ -83,6 +85,26 @@ class MemoCreation(LoginRequiredMixin, CreateView):
         form.instance.creador = self.request.user
         return super().form_valid(form)
 
+    def post(self, request, *args, **kwargs):
+        import datetime
+        # remember old state
+        _mutable = request.POST._mutable
+        # set to mutable
+        request.POST._mutable = True
+        fl = request.POST['fecha_limite']
+        fc = request.POST['fecha_cita']
+        try:
+            request.POST['fecha_limite'] = datetime.datetime.strptime(fl, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        except:
+            pass
+        try:
+            request.POST['fecha_cita'] = datetime.datetime.strptime(fc, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        except:
+            pass
+        
+        request.POST._mutable = _mutable
+        return super().post(request, *args, **kwargs)
+
 class MemoUpdate(LoginRequiredMixin, UpdateView):
     model = Memo
     success_url = reverse_lazy('memos:list')
@@ -110,11 +132,18 @@ class MemoUpdate(LoginRequiredMixin, UpdateView):
         _mutable = request.POST._mutable
         # set to mutable
         request.POST._mutable = True
-
         fl = request.POST['fecha_limite']
-        request.POST['fecha_limite'] = datetime.datetime.strptime(fl, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        fc = request.POST['fecha_cita']
+        try:
+            request.POST['fecha_limite'] = datetime.datetime.strptime(fl, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        except:
+            pass
+        try:
+            request.POST['fecha_cita'] = datetime.datetime.strptime(fc, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        except:
+            pass
+        
         request.POST._mutable = _mutable
-
         return super().post(request, *args, **kwargs)
 
 class MemoDelete(LoginRequiredMixin, DeleteView):
