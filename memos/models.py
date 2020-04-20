@@ -32,10 +32,10 @@ class Memo(models.Model):
         LABORAL = 'ta', _('Laboral')
         FAMILIAR = 'fa', _('Familiar')
 
-    class Prioridad(models.TextChoices):
-        ALTA = 'al', _('Alta')
-        NORMAL = 'no', _('Normal')
-        BAJA = 'ba', _('Baja')
+    class Prioridad(models.IntegerChoices):
+        ALTA = 1, _('Alta')
+        NORMAL = 2, _('Normal')
+        BAJA = 3, _('Baja')
 
     # %(class)s
     titulo = models.CharField(max_length=100, verbose_name="Titulo")
@@ -52,11 +52,11 @@ class Memo(models.Model):
     padre = models.ForeignKey('self', related_name='hijos', on_delete=models.CASCADE, blank=True, null=True)
     completada = models.BooleanField(default=False, verbose_name="Completada")
     ignorar = models.BooleanField(default=False, verbose_name="Ignorar")
-    prioridad = models.CharField(max_length=2, choices=Prioridad.choices, default=Prioridad.NORMAL, null=True)
+    prioridad = models.IntegerField(choices=Prioridad.choices, default=Prioridad.NORMAL, null=True)
     dirigidos = []
 
     class Meta:
-        ordering = ['fecha_creacion']
+        ordering = ['prioridad', 'fecha_creacion']
 
     def get_absolute_url(self):
         from django.urls import reverse

@@ -21,6 +21,10 @@
             }
             else{
                 inp.className = "form-control";
+                if (inp.id == "id_fecha_cita" || inp.id == "id_fecha_limite")
+                {
+                    inp.type = "datetime-local";
+                }
             }
             divs.classList.add('my-1');
             //inp.value = "";

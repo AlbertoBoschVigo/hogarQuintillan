@@ -34,14 +34,25 @@ class MemoList(LoginRequiredMixin, ListView):
 """
 
 class MemoList(ListView):
+    model = Memo
+    template_name = 'memos/memo_list.html'
+    #paginate_by = 2
     def get_queryset(self):
         from django.utils import timezone
         import datetime
         tomorrow = timezone.now().date() + datetime.timedelta(days=1)
-        if settings.DEBUG or self.request.user.is_authenticated:
+        if settings.DEBUG:
+            return Memo.objects.all().order_by('prioridad')
+
+        elif self.request.user.is_authenticated:
+            """
             return Memo.objects.filter(
                 Q(fecha_limite__lt=tomorrow)|Q(fecha_limite__isnull=True)
             )
+            """
+            return Memo.objects.filter(
+                Q(creador=self.request.user)|Q(dirigido__pk=self.request.user.pk)
+            ).order_by('prioridad', '-fecha_limite')
         else:
             return Memo.objects.none()
 
@@ -89,6 +100,22 @@ class MemoUpdate(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.creador = self.request.user
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+    def post(self, request, *args, **kwargs):
+        import datetime
+        # remember old state
+        _mutable = request.POST._mutable
+        # set to mutable
+        request.POST._mutable = True
+
+        fl = request.POST['fecha_limite']
+        request.POST['fecha_limite'] = datetime.datetime.strptime(fl, "%Y-%m-%dT%H:%M").strftime("%d/%m/%y %H:%M:%S")
+        request.POST._mutable = _mutable
+
+        return super().post(request, *args, **kwargs)
 
 class MemoDelete(LoginRequiredMixin, DeleteView):
     model = Memo

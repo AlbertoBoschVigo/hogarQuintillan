@@ -23,6 +23,7 @@
   <p>Dirigido a: <i>{{ memo.dirigido.all|join:" , "|capfirst }}</i></p>
   <p>Creador: <i>{{ memo.creador|capfirst }}</i></p>
   <p>Categoria: <i>{{ memo.get_categoria_display }}</i></p>
+  <p>Prioridad: <i>{{ memo.get_prioridad_display }}</i></p>
   <p>Creado: <i>{{ memo.fecha_creacion }}</i></p>
   <p>Fecha limite: <i>{{ memo.fecha_limite|default:"No tiene" }}</i></p>
   <p>Fecha cita: <i>{{ memo.fecha_cita|default:"No tiene" }}</i></p>

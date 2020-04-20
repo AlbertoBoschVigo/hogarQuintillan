@@ -1,8 +1,21 @@
 {% extends 'memos/base.html' %}
-
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index'%}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'memos:list'%}">Memos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Borrar</li>
+  </ol>
+</nav>
+<p>
+    <a href="#" id="button-go-back">Volver</a>
+</p>
+{% endblock %}
 {% block bloqueCentral %}
    <form method="post">{% csrf_token %}
-    ¿Estás seguro que deseas borrar el curso "{{ object }}"?
+   <div class="etiqueta mx-auto my-3 text-center">
+    <p>¿Estás seguro que deseas borrar el curso "{{ object }}"?</p>
     <input type="submit" value="Submit" />
+    </div>
 </form>
 {% endblock %}
