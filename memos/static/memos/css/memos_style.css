@@ -144,43 +144,6 @@ div a {
     color: black;
 }
 
-.carousel-control-next {
-    position: relative;
-    margin-right: -100px;
-    color: black;
-}
-
-.myBtnTop{
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    
-    z-index: 99; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
-    outline: none; /* Remove outline */
-    
-    color: white; /* Text color */
-    cursor: pointer; /* Add a mouse pointer on hover */
-    padding: 10px; /* Some padding */
-    border-radius: 10px; /* Rounded corners */
-    font-size: 14px; /* Increase font size */
-}
-
-
-.myBtnTop:hover {
-    background-color: #555; /* Add a dark-grey background on hover */
-  }
-
-#myBtnTopR{
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 60px; /* Place the button 60px from the right */
-    /*background-color: rgb(107, 172, 161); /* Set a background color */
-    background-color: rgb(72, 146, 128);
-    
-}
-
-#myBtnTopL{
-    bottom: 20px; /* Place the button at the bottom of the page */
-    left: 60px; /* Place the button 60px from the right */
-    /*background-color: rgb(219, 154, 154); /* Set a background color */
-    background-color: rgb(77, 136, 151);
+div.limitar-ancho{
+    width: 25rem;
 }

@@ -24,11 +24,13 @@
         <div class="card border-success mx-1 my-1" style="width: 18rem;">
         {% elif memo.prioridad == 1 %}
         <div class="card border-danger mx-1 my-1" style="width: 18rem;">
+        {% elif memo.prioridad == 3 %}
+        <div class="card border-secondary mx-1 my-1" style="width: 18rem;">
         {% else %}
         <div class="card border-info mx-1 my-1" style="width: 18rem;">
         {% endif %}
             
-            <div class="card-body" data-prioridad="{{ memo.prioridad }}" data-creador="{{ memo.creador}}" data-fecha="{{ memo.fecha_limite }}">
+            <div class="card-body{% if memo.prioridad == 3 %} text-secondary{% endif %}" data-prioridad="{{ memo.prioridad }}" data-creador="{{ memo.creador}}" data-fecha="{{ memo.fecha_limite }}">
             
                 <h5 class="card-title">{{ memo.titulo }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{ memo.creador }}</h6>
@@ -37,11 +39,13 @@
             </div>
             
             {% if memo.completada is True%}
-            <div class="card-footer bg-transparent border-success">
+            <div class="card-footer border-success">
             {% elif memo.prioridad == 1 %}
-            <div class="card-footer bg-transparent border-danger">
+            <div class="card-footer  border-danger{% if memo.day %} text-danger{% endif %}">
+            {% elif memo.prioridad == 3 %}
+            <div class="card-footer border-secondary">
             {% else %}
-            <div class="card-footer bg-transparent border-info">
+            <div class="card-footer border-info{% if memo.day %} text-danger{% endif %}">
             {% endif %}
             {% if memo.completada is True%}
             Completada

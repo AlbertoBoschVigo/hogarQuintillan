@@ -72,19 +72,19 @@ class MemoListViewTests(TestCase):
 
     def test_future_memo(self):
         """
-        memos with a fecha_limte in the future aren't displayed on
-        the index page.
+        memos with a fecha_limte in the future are displayed too
+        on the index page.
         """
         user = User.objects.get(username='testuserfalso')
         create_memo(titulo="Future memo.", days=30, user = user)
         response = self.client.get(reverse('memos:list'))
-        self.assertContains(response, "No hay memos disponibles.")
-        self.assertQuerysetEqual(response.context['memo_list'], [])
+        #self.assertContains(response, "No hay memos disponibles.")
+        self.assertQuerysetEqual(response.context['memo_list'], ['<Memo: Future memo.>'])
 
     def test_future_memo_and_past_memo(self):
         """
-        Even if both past and future memos exist, only past memos
-        are displayed.
+        If both past and future memos exist, first created
+        is first displayed.
         """
         user = User.objects.get(username='testuserfalso')
         create_memo(titulo="Past memo.", days=-30, user = user)
@@ -92,7 +92,7 @@ class MemoListViewTests(TestCase):
         response = self.client.get(reverse('memos:list'))
         self.assertQuerysetEqual(
             response.context['memo_list'],
-            ['<Memo: Past memo.>']
+            ['<Memo: Past memo.>', '<Memo: Future memo.>']
         )
 
     def test_two_past_memos(self):
