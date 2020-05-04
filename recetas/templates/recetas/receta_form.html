@@ -1,0 +1,98 @@
+{% extends 'recetas/base_toda_pagina.html' %}
+{% block head %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function (){
+
+        document.getElementById('linkEmergente').onclick = function (){ 
+                window.open(this.dataset.link,"ventana1","width=580,height=300,scrollbars=NO") 
+            }
+        document.getElementById('linkEmergente2').onclick = function (){ 
+                window.open(this.dataset.link,"ventana1","width=580,height=300,scrollbars=NO") 
+            }
+        var formGroups = document.querySelectorAll('.form-group');
+
+        var lastFgIng = formGroups[formGroups.length - 2];
+        var lastFgCan = formGroups[formGroups.length - 1];
+        var inpCan = lastFgCan.children[1];
+        inpCan.addEventListener('input', insertar);
+    });
+    
+    function insertar(){
+        var formGroups = document.querySelectorAll('.form-group');
+        var lastFgIng = formGroups[formGroups.length - 2];
+        var lastFgCan = formGroups[formGroups.length - 1];
+        let cloneI = lastFgIng.cloneNode(true)
+        let cloneC = lastFgCan.cloneNode(true)
+        let nameI = cloneI.children[1].name;
+        let n = parseInt(nameI.split('_')[1]) + 1
+
+        cloneI.children[1].setAttribute('name', 'ingrediente_' + n);
+        cloneC.children[1].setAttribute('name', 'cantidad_' + n);
+        cloneI.children[1].setAttribute('id', 'id_ingrediente_' + n);
+        cloneC.children[1].setAttribute('id', 'id_cantidad_' + n);
+        cloneC.children[1].setAttribute('placeholder', 'Cantidad ' + n);
+        cloneI.children[0].setAttribute('for', 'id_ingrediente_' + n);
+        cloneC.children[0].setAttribute('for', 'id_cantidad_' + n);
+        cloneI.children[0].innerText = "Ingrediente " + n;
+        cloneC.children[0].innerText = "Cantidad " + n;
+        cloneI.children[1].value = '';
+        cloneC.children[1].value = '';
+        lastFgCan.parentElement.appendChild(cloneI);
+        lastFgCan.parentElement.appendChild(cloneC);
+        this.removeEventListener('input', insertar);
+        cloneC.children[1].addEventListener('input', insertar);
+    }
+    </script>
+{% endblock %}
+
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recetas:index' %}">Recetas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+    {{ namePag }}
+    </li>
+  </ol>
+</nav>
+
+{% endblock %}
+{% block bloqueCentral %}
+    <p>
+        <a href="#" id="button-go-back">Volver</a>
+    </p>
+    <div class="col-12 my-2 mx-2 p-2">
+        <form method="post">
+        {% csrf_token %}
+            <h5 class="text-center">{{namePag}} receta</h5>
+            {% load bootstrap4 %}
+            <div class="form-row">
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="mx-2 my-2">
+                        <a href="#" data-link="{% url 'recetas:crear_ingrediente' %}" id="linkEmergente"><span class="badge badge-success">Crea ingrediente</span></a>
+                    </div>
+                    
+                    
+                    <div class="mx-2 my-2">
+                        <button class="btn mx-auto btn-success" type="submit">Enviar</button>
+                    </div>
+                </div>
+                <div class="form-group col-12 col-md-6">
+                    {% bootstrap_form form %}
+                </div>
+                <div class="col-12 col-md-3 d-flex justify-content-center">
+                    <div class="mx-2 my-2">
+                        <a href="#" data-link="{% url 'recetas:crear_ingrediente' %}" id="linkEmergente2"><span class="badge badge-success">Crea ingrediente</span></a>
+                    </div>
+                    
+                    
+                    <div class="mx-2 my-2">
+                        <button class="btn mx-auto btn-success" type="submit">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+  
+{% endblock %}

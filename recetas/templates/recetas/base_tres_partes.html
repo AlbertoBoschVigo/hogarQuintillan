@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{%block title %}Hogar Quintillan{% endblock %}</title>
+        <title>{% block title %}Hogar Quintillan{% endblock %}</title>
         <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'recetas/css/recetas_style.css' %}" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="{% static 'recetas/img/favicon.ico' %}">
@@ -30,7 +30,7 @@
                     {% if categoria %}
                         <img src="{% static 'recetas/img/categoria_'|add:categoria|add:'_top.jpg' %}" alt="" width="220"/>
                     {% else %}
-                        <img src="{% static 'recetas/img/categoria_todas_top.jpg' %}" alt="" width="220"/>
+                        <a href="{% url 'recetas:index' %}"><img src="{% static 'recetas/img/categoria_todas_top.jpg' %}" alt="" width="220"/></a>
                     {% endif %}
                 </div>
                 <div id="top_menu" class="col-6">

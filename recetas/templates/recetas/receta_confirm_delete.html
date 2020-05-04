@@ -1,0 +1,25 @@
+{% extends 'memos/base.html' %}
+{% block header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'recetas:index' %}">Recetas</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+    Borrar
+    </li>
+  </ol>
+</nav>
+
+{% endblock %}
+{% block bloqueCentral %}
+<div class="etiqueta mx-auto my-3 text-center limitar-ancho">
+   <form method="post">{% csrf_token %}
+   
+    <p>¿Estás seguro que deseas borrar la receta "{{ object }}"?</p>
+    <input type="submit" value="Confirmar" />
+   </form>
+    <p>
+      <a href="#" id="button-go-back">Cancelar</a>
+  </p>
+ </div>
+{% endblock %}

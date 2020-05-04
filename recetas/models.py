@@ -6,9 +6,13 @@ from datetime import timedelta
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=64, unique=True)
+    descripcion = models.TextField(max_length=500, default="Maravillosas recetas de este estilo particular, ñam, ñam")
 
     def __str__(self):
         return f'{self.nombre}'
+
+    class Meta:
+        ordering = ['nombre']
 
 
 class Ingrediente(models.Model):

@@ -1,4 +1,21 @@
 {% extends "recetas/base_toda_pagina.html" %}
 {% block title %}
-{{ categoria }}
+{{ recetas.0.categoria.nombre|capfirst }}
+{% endblock %}
+
+{% block bloqueCentral %}
+    {% for receta in recetas %}
+        <div class="card border-dark mb-3 mx-2" style="width: 18rem;">
+        <div class="card-header">Dificultad: {{ receta.get_dificultad_display }}</div>
+        <div class="card-body text-dark">
+            <h5 class="card-title">{{ receta.nombre }}</h5>
+            <p class="card-text">{{ receta.elaboracion|truncatechars:35 }}</p>
+            <a href="{% url 'recetas:receta' receta.categoria.nombre receta.pk %}">Ver mas</a>
+        </div>
+        <div class="card-footer">
+             <a href="{% url 'recetas:editar' receta.categoria.nombre receta.pk %}">Modificar</a>
+             <a href="{% url 'recetas:borrar' receta.categoria.nombre receta.pk %}">Borrar</a>
+        </div>
+        </div>
+    {% endfor %}
 {% endblock %}

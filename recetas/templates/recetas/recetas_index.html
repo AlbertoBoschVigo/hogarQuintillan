@@ -9,21 +9,22 @@ Recetitas
 
 {% endblock %}
 
-{% block bloqueIzquierdo %}
-    
+{% block topLinks %}
+    <a href="{% url 'recetas:crear' %}" class= "btn btn-primary text-white">Nueva receta</a>
 {% endblock %}
 
 {% block bloqueCentral %}
-<div class="card-deck">
-{% for categoria in categorias %}
+<div class="card-deck mx-0">
+{% for categoria in categorias.all %}
   <div class="card">
-    <img class="card-img-top" src="{% static 'recetas/img/categoria_'|add:categoria|add:'_top.jpg' %}" alt="{{ categoria }}">
+    <img class="card-img-top" src="{% static 'recetas/img/categoria_'|add:categoria.nombre|add:'_top.jpg' %}" alt="{{ categoria }}">
     <div class="card-body">
-      <h5 class="card-title">{{ categoria }}</h5>
-      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <h5 class="card-title">{{ categoria.nombre|capfirst }}</h5>
+      <p class="card-text">{{ categoria.descripcion }}</p>
+      <a href="{% url 'recetas:categoria' categoria.nombre %}" class="btn btn-primary stretched-link">Ver mas</a>
     </div>
     <div class="card-footer">
-      <small class="text-muted">Last updated 3 mins ago</small>
+      <small class="text-muted">Actualizado hace {% cycle '5' '12' '3' '22' %} minutos</small>
     </div>
   </div>
 {% endfor %}

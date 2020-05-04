@@ -3,7 +3,7 @@ class contextoBase():
         topHeader = [
             ('calendarioGlobal', 'Calendario'),
             ('chat_index', 'Chat'),
-            ('recetas_index', 'Recetas'),
+            ('recetas:index', 'Recetas'),
             ('memos:list', 'Memos'),
             ('vera_tareas', 'TareasV')
         ]

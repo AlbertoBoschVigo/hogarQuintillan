@@ -149,7 +149,3 @@ class MemoUpdate(LoginRequiredMixin, UpdateView):
 class MemoDelete(LoginRequiredMixin, DeleteView):
     model = Memo
     success_url = reverse_lazy('memos:list')
-
-    def form_valid(self, form):
-        form.instance.creador = self.request.user
-        return super().form_valid(form)

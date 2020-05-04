@@ -82,7 +82,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
-        '{{ project_name }}.custom': {
+        'hogarQuintillan.custom': {
             'handlers': ['console', 'production'],
             'level': 'DEBUG',
         }

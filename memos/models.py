@@ -56,7 +56,7 @@ class Memo(models.Model):
     dirigidos = []
 
     class Meta:
-        ordering = ['prioridad', 'fecha_creacion']
+        ordering = ['prioridad', 'fecha_limite', 'fecha_creacion']
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -88,12 +88,16 @@ class Memo(models.Model):
         # Devuelve True si la fecha limite es hoy
         if self.fecha_limite:
             return self.fecha_limite.date() == datetime.now().date()
+        if self.fecha_cita:
+            return self.fecha_cita.date() == datetime.now().date()
         return False
 
     def week(self):
         # Devuelve True si la fecha limite es esta semana
         if self.fecha_limite:
             return self.fecha_limite.date() <= datetime.now().date() + timedelta(days=6-date.today().weekday())
+        if self.fecha_cita:
+            return self.fecha_cita.date() <= datetime.now().date() + timedelta(days=6-date.today().weekday())
         return False
 
     def __str__(self):
